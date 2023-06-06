@@ -13,13 +13,11 @@ public class AnadirPorCodigo {
 
     public ArrayList<Empresa> ListadoEmpresas = new ArrayList<>();
 
-    public ArrayList<Empresa> getListadoEmpresas() {
+    public  ArrayList<Empresa> getListadoEmpresas() {
         return ListadoEmpresas;
     }
 
-    public void setListadoEmpresas(ArrayList<Empresa> listadoEmpresas) {
-        ListadoEmpresas = listadoEmpresas;
-    }
+
 
     public  void anadirEmpresas(){
 

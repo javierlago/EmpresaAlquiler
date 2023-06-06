@@ -54,6 +54,26 @@ public ProductoAlquiler() throws IOException {
             System.err.println(e.getMessage());
         }
     }while(!InputEmpty(marca)|| !validarNombre(marca));
+    do{
+        System.out.println("Introducir el nombre de la modelo");
+        modelo=br.readLine();
+        try{
+            if(!InputEmpty(modelo))throw new EntradaNull();
+            if(!validarNombre(modelo))throw new NombreCorrecto();
+
+        }catch (EntradaNull | NombreCorrecto e){
+            System.err.println(e.getMessage());
+        }
+    }while(!InputEmpty(modelo)|| !validarNombre(modelo));
+    do{
+        System.out.println("Introducir el precio por dia");
+
+
+
+
+
+    }while (!floatNoNegativo(precioDia)||!InputEmpty(String.valueOf(precioDia)));
+
 
 
 

@@ -1,20 +1,22 @@
 package EmpresaColeccion;
 
+import ByCode.AnadirPorCodigo;
 import Excepciones.EntradaNull;
 import Interfaces.Bufferreader;
 import Validaciones.Validaciones;
 
+import java.awt.*;
 import java.io.IOException;
 import java.util.ArrayList;
 
 public class MetodosEmpresa implements Bufferreader {
 
-    public ArrayList<Empresa> ListadoEmpresas = new ArrayList<>();
-    //TODO: Metodo en el que se muestra las empresas registradas y se obtiene el cif segun la que has indicado
-    public String cifSegunEmpresabyUseer() throws IOException {
-        String empresaSeleccionada;
+
+    public String cifSegunEmpresabyUseer(String empresaSeleccionada) throws IOException {
+
+        AnadirPorCodigo  apc = new AnadirPorCodigo();
         Empresa emp = null;
-        for (Empresa empresa : this.ListadoEmpresas
+        for (Empresa empresa : apc.getListadoEmpresas()
         ) {
             System.out.println("->" + empresa.getNombreEmpresa() + "\n");
         }
@@ -23,7 +25,7 @@ public class MetodosEmpresa implements Bufferreader {
         do {
             empresaSeleccionada = br.readLine();
             try {
-                for (Empresa empresa : this.ListadoEmpresas
+                for (Empresa empresa : apc.getListadoEmpresas()
                 ) {
                     if (empresaSeleccionada.compareToIgnoreCase(empresa.getNombreEmpresa()) == 0)
                         emp = empresa;

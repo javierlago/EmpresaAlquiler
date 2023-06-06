@@ -19,6 +19,8 @@ public class ProductoVenta extends Producto {
 
 
 
+
+
     public float getPrecioVenta() {
         return precioVenta;
     }
