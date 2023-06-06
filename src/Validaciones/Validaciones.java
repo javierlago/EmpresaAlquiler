@@ -2,8 +2,6 @@ package Validaciones;
 
 import Interfaces.Bufferreader;
 
-import java.io.IOException;
-
 public class Validaciones implements Bufferreader {
     /*public static void main(String[] args) throws IOException {
         String caca = br.readLine();
@@ -29,7 +27,11 @@ public class Validaciones implements Bufferreader {
 
 
     }
-
+    public static boolean lOr(char letra){
+        if (letra == 'L') return true;
+        if (letra=='R') return true;
+        return false;
+    }
 
 
 }

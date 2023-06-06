@@ -1,6 +1,6 @@
 package EmpresaColeccion;
 
-import Excepciones.CifInvalidp;
+import Excepciones.CifInvalido;
 import Excepciones.EntradaNull;
 import Excepciones.NombreCorrecto;
 import Excepciones.TelefonoInvalido;
@@ -77,10 +77,10 @@ public class Empresa implements Serializable, Bufferreader {
             this.cif = br.readLine();
             try {
                 if (!InputEmpty(cif)) throw new EntradaNull();
-                if (!validateCIF(cif)) throw new CifInvalidp();
+                if (!validateCIF(cif)) throw new CifInvalido();
 
 
-            } catch (EntradaNull | CifInvalidp in) {
+            } catch (EntradaNull | CifInvalido in) {
                 System.err.println(in.getMessage());
             }
         } while (!InputEmpty(cif) || !validateCIF(cif));

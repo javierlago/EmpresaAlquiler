@@ -3,6 +3,7 @@ package EmpresaColeccion;
 import ByCode.AnadirPorCodigo;
 import Excepciones.EntradaNull;
 import Interfaces.Bufferreader;
+import Productos.Producto;
 import Validaciones.Validaciones;
 
 import java.awt.*;
@@ -12,11 +13,11 @@ import java.util.ArrayList;
 public class MetodosEmpresa implements Bufferreader {
 
 
-    public String cifSegunEmpresabyUseer(String empresaSeleccionada) throws IOException {
+    public String cifSegunEmpresabyUseer(String empresaSeleccionada,ArrayList<Empresa> Listado) throws IOException {
 
-        AnadirPorCodigo  apc = new AnadirPorCodigo();
+
         Empresa emp = null;
-        for (Empresa empresa : apc.getListadoEmpresas()
+        for (Empresa empresa : Listado
         ) {
             System.out.println("->" + empresa.getNombreEmpresa() + "\n");
         }
@@ -25,7 +26,7 @@ public class MetodosEmpresa implements Bufferreader {
         do {
             empresaSeleccionada = br.readLine();
             try {
-                for (Empresa empresa : apc.getListadoEmpresas()
+                for (Empresa empresa : Listado
                 ) {
                     if (empresaSeleccionada.compareToIgnoreCase(empresa.getNombreEmpresa()) == 0)
                         emp = empresa;
@@ -60,5 +61,17 @@ public class MetodosEmpresa implements Bufferreader {
         return cifAbuscar;
     }
 
+
+
+    public static void anadirProductoAempresa(ArrayList<Empresa> Listado, String nombreEmpresa, Producto producto){
+        for (Empresa empresa: Listado
+             ) {if(empresa.getNombreEmpresa().compareToIgnoreCase(nombreEmpresa)==0){
+                    empresa.getListadoProductos().add(producto);
+        }
+
+        }
+
+
+    }
 
 }

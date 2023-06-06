@@ -2,6 +2,7 @@ package ByCode;
 
 
 import EmpresaColeccion.Empresa;
+import Productos.Producto;
 import Productos.ProductoAlquiler;
 import Productos.ProductoVenta;
 
@@ -26,7 +27,15 @@ public class AnadirPorCodigo {
         Pontevedra.getListadoProductos().add(new ProductoVenta("Combarro","Lite","Pontevedra",1200,ListadoEmpresas));
         Pontevedra.getListadoProductos().add(new ProductoVenta("Lonza","Strong","Pontevedra",1200,ListadoEmpresas));
         Pontevedra.getListadoProductos().add(new ProductoAlquiler("Pontedeume","Weak","Pontevedra",50,'L',ListadoEmpresas));
+        Pontevedra.getListadoProductos().add(new ProductoAlquiler("Cangas","Weak","Pontevedra",50,'L',ListadoEmpresas));
 
     }
+
+
+
+
+
+
+
 
 }

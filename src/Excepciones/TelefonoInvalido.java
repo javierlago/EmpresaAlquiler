@@ -5,4 +5,5 @@ public class TelefonoInvalido extends Exception {
     public TelefonoInvalido(){
         super(mensaje);
     }
+
 }
