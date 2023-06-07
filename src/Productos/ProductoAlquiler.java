@@ -13,8 +13,14 @@ import java.util.ArrayList;
 import static Validaciones.Validaciones.*;
 
 public class ProductoAlquiler extends Producto implements Bufferreader {
+    ArrayList<Usos> listadoUsuos= new ArrayList<>();
 
-float precioDia;
+    public ArrayList<Usos> getListadoUsuos() {
+        return listadoUsuos;
+    }
+
+
+    float precioDia;
 char estado;
 
     public float getPrecioDia() {
@@ -37,12 +43,13 @@ char estado;
         super(marca, modelo,nombreEmpresa);
         this.precioDia=precioDia;
         this.estado=estado;
-        setCodigo("A"+ String.format("%03d",numeroCodigo));
+        setCodigo("A"+ String.format("%03d",getNumeroCodigo()));
         setCif(MetodosEmpresa.cifSegunEmpresa(nombreEmpresa,Listado));
     }
 
-public ProductoAlquiler(ArrayList<Empresa> Listado) throws IOException {
-        setCodigo("A"+ String.format("%03d", Producto.numeroCodigo++));
+public ProductoAlquiler() throws IOException {
+
+    setCodigo("A"+ String.format("%03d", getNumeroCodigo()));
     this.estado='L';
     do {
         System.out.println("Introducir la marca del producto");
@@ -73,24 +80,12 @@ public ProductoAlquiler(ArrayList<Empresa> Listado) throws IOException {
         String precioDia=br.readLine();
         if(isFloat(precioDia)){this.precioDia=Float.parseFloat(precioDia);
             bandera=true;
-        }
+        }else System.err.println("Debes de introducir un precio correcto");
         }while(!bandera);
     }while (!floatNoNegativo(precioDia)||!InputEmpty(String.valueOf(precioDia)));
-    String nombreEmpresa;
-    do{
-        System.out.println("Indique el nombre de la empresa");
-         nombreEmpresa=br.readLine();
-        try{
-            if(!validarNombre(nombreEmpresa))throw new NombreCorrecto();
-            if (!InputEmpty(nombreEmpresa)) throw new EntradaNull();
-        }catch (NombreCorrecto|EntradaNull e){
-            System.err.println(e.getMessage());
 
-        }
 
-    }while(!validarNombre(nombreEmpresa) || !InputEmpty(nombreEmpresa));
 
-    this.cif=MetodosEmpresa.cifSegunEmpresa(nombreEmpresa,Listado);
 
 
 

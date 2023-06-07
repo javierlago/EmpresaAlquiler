@@ -11,11 +11,16 @@ public abstract class Producto {
 
         this.marca = marca;
         this.modelo = modelo;
-        Producto.numeroCodigo++;
+
     }
 
 
-   static int numeroCodigo=000;
+   static int numeroCodigo=0;
+
+    public static int getNumeroCodigo() {
+        return numeroCodigo++;
+    }
+
     String codigo,marca,modelo,cif;
     public String getCodigo() {
         return codigo;

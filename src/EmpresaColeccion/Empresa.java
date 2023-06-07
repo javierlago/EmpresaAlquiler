@@ -13,7 +13,7 @@ import java.util.ArrayList;
 
 import static Validaciones.Validaciones.*;
 
-public class Empresa implements Serializable, Bufferreader {
+public class Empresa implements Serializable,Bufferreader {
     public String getCif() {
         return cif;
     }

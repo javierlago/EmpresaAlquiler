@@ -2,6 +2,8 @@ package Validaciones;
 
 import Interfaces.Bufferreader;
 
+import java.io.IOException;
+
 public class Validaciones implements Bufferreader {
     /*public static void main(String[] args) throws IOException {
         String caca = br.readLine();
@@ -27,11 +29,36 @@ public class Validaciones implements Bufferreader {
 
 
     }
-    public static boolean lOr(char letra){
-        if (letra == 'L') return true;
-        if (letra=='R') return true;
-        return false;
+        public static boolean isInt(String numero){
+        try {
+            Integer.parseInt(numero);
+            return true;
+
+        }catch (NumberFormatException e){
+            return false;}
+
+
+        }
+
+        public static boolean numCorrecto(String numero){
+            return(Integer.parseInt(numero)>=0 && Integer.parseInt(numero)<=6);
+
+
+        }
+
+        public static boolean repetirProceso(String mensaje) throws IOException {
+        String respuesta;
+        boolean bandera=true;
+        do{
+            System.out.println(mensaje);
+            respuesta= br.readLine();
+            if(respuesta.compareToIgnoreCase("s")!=0 && respuesta.compareToIgnoreCase("n")!=0){
+                System.err.println("Introduce una respuesta correcta");
+                bandera=false;}
+        }while(!bandera);
+            if(respuesta.compareToIgnoreCase("s")==0){
+                return true;
+            }else return false;
+
     }
-
-
 }

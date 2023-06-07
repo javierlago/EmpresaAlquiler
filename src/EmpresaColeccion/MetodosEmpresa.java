@@ -13,43 +13,8 @@ import java.util.ArrayList;
 public class MetodosEmpresa implements Bufferreader {
 
 
-    public String cifSegunEmpresabyUseer(String empresaSeleccionada,ArrayList<Empresa> Listado) throws IOException {
 
-
-        Empresa emp = null;
-        for (Empresa empresa : Listado
-        ) {
-            System.out.println("->" + empresa.getNombreEmpresa() + "\n");
-        }
-        System.out.println("En que empresa desea registrar el producto ");
-        boolean bandera = true;
-        do {
-            empresaSeleccionada = br.readLine();
-            try {
-                for (Empresa empresa : Listado
-                ) {
-                    if (empresaSeleccionada.compareToIgnoreCase(empresa.getNombreEmpresa()) == 0)
-                        emp = empresa;
-                }
-
-                if (!Validaciones.InputEmpty(empresaSeleccionada)) {
-                    bandera=false;
-                    throw new EntradaNull();
-                }
-                if (emp == null) {
-                    System.err.println("Debes seleccionar una de las empresas de la lista");
-                    bandera = false;
-                }
-
-            } catch (EntradaNull e) {
-                System.err.println(e.getMessage());
-            }
-
-        } while (!bandera);
-
-        return emp.getCif();
-    }
-
+        //Metodo para relacionar un producto con una empresa mediante el CIF
     public static String cifSegunEmpresa(String nombreEmpresa,ArrayList<Empresa> lista){
         String cifAbuscar=null;
         for (Empresa empresa: lista
@@ -62,16 +27,45 @@ public class MetodosEmpresa implements Bufferreader {
     }
 
 
-
-    public static void anadirProductoAempresa(ArrayList<Empresa> Listado, String nombreEmpresa, Producto producto){
+//Metodo en el que se añade un producto a una empresa,por teclado, segun las empresas existentes.
+    public static void anadirProductoAempresa(ArrayList<Empresa> Listado,  Producto producto) throws IOException {
+        boolean bandera=true;
+        boolean encotrado=false;
+        String nombreEmpresa;
+        do{
+            System.out.println("En que empresa quieres registrar el producto\n");
+           PrintearEmpresas(Listado);
+            nombreEmpresa=br.readLine();
         for (Empresa empresa: Listado
              ) {if(empresa.getNombreEmpresa().compareToIgnoreCase(nombreEmpresa)==0){
+                 producto.setCif(empresa.getCif());
                     empresa.getListadoProductos().add(producto);
+            System.out.println("Se ha añaddido el producoto "+producto.getModelo()+" a la empresa "+empresa.getNombreEmpresa());
+            encotrado=true;
+        }
+        }
+        if(!encotrado){
+            System.err.println("Introduce un nombre de la lista");
+            bandera=false;
         }
 
-        }
+        }while(!bandera);
+
+    }
+
+    public static void PrintearEmpresas(ArrayList<Empresa> Listado){
+        System.out.println("Empresas existentes");
+        for (Empresa empresa: Listado
+        )
+            System.out.println("->" + empresa.getNombreEmpresa() +"\n");
 
 
     }
+
+    public void mostrarUsosProducto(){
+
+    }
+
+
 
 }
