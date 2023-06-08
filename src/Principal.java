@@ -38,6 +38,6 @@ public class Principal {
     }*/
         do{
         Menu_Principal.PrimerMenu(Listado);
-        }while(repetirProceso("Deseas repetir la operacion S/N"));
+        }while(repetirProceso("Desea realizar otra operacion operacion S/N"));
     }
 }

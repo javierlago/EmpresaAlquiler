@@ -1,37 +1,45 @@
 package Productos;
 
+import Interfaces.Bufferreader;
+
+import java.io.IOException;
+import java.io.Serializable;
 import java.time.LocalDate;
 
-public class Usos {
+import static Validaciones.Validaciones.convertiFecha;
+import static java.time.temporal.ChronoUnit.*;
+
+public class Usos implements Bufferreader, Serializable {
 
 
-    LocalDate fechaAlquiler,fechaEntrega;
+    LocalDate fechaInicioAlquiler, fechaFinEntrega;
     float importeApagar;
     String codigoProducto;
     String claveAlquiler;
 
-    public LocalDate getFechaAlquiler() {
-        return fechaAlquiler;
+    public LocalDate getFechaInicioAlquiler() {
+        return fechaInicioAlquiler;
     }
 
-    public void setFechaAlquiler(LocalDate fechaAlquiler) {
-        this.fechaAlquiler = fechaAlquiler;
+    public void setFechaInicioAlquiler(LocalDate fechaInicioAlquiler) {
+        this.fechaInicioAlquiler = fechaInicioAlquiler;
     }
 
-    public LocalDate getFechaEntrega() {
-        return fechaEntrega;
+    public LocalDate getFechaFinEntrega() {
+        return fechaFinEntrega;
     }
 
-    public void setFechaEntrega(LocalDate fechaEntrega) {
-        this.fechaEntrega = fechaEntrega;
+    public void setFechaFinEntrega(LocalDate fechaFinEntrega) {
+        this.fechaFinEntrega = fechaFinEntrega;
     }
 
     public float getImporteApagar() {
         return importeApagar;
     }
 
-    public void setImporteApagar(float importeApagar) {
-        this.importeApagar = importeApagar;
+    public void setImporteApagar(LocalDate diaInicio,LocalDate diaFinal,ProductoAlquiler productoAlquiler) {
+        long day = DAYS.between(diaInicio,diaFinal);
+        this.importeApagar = day*productoAlquiler.getPrecioDia();
     }
 
     public String getCodigoProducto() {
@@ -50,8 +58,58 @@ public class Usos {
         this.claveAlquiler = claveAlquiler;
     }
 
-    public Usos(LocalDate fechaAlquiler, LocalDate fechaEntrega) {
-        this.fechaAlquiler = fechaAlquiler;
-        this.fechaEntrega = fechaEntrega;
+
+    // Constructores
+
+    public Usos(LocalDate fechaInicioAlquiler, LocalDate fechaFinEntrega, ProductoAlquiler producto) {
+        this.fechaInicioAlquiler = fechaInicioAlquiler;
+        this.fechaFinEntrega = fechaFinEntrega;
+        setCodigo(producto);
+        setImporteApagar(fechaInicioAlquiler, fechaFinEntrega,producto);
+        setClaveAlquiler(producto, fechaInicioAlquiler);
     }
+
+    public Usos(ProductoAlquiler productoAlquiler) throws IOException {
+        String fecha=null;
+        do{
+            System.out.println("Indique la fecha de  inicio del alquiler");
+            fecha=br.readLine();
+        }while(convertiFecha(fecha)==null);
+        setFechaInicioAlquiler(convertiFecha(fecha));
+        do{
+            System.out.println("Indique la fecha del  fin del alquiler");
+            fecha=br.readLine();
+        }while(convertiFecha(fecha)==null);
+        setFechaFinEntrega(convertiFecha(fecha));
+        setCodigo(productoAlquiler);
+        setImporteApagar(this.fechaInicioAlquiler,this.fechaFinEntrega,productoAlquiler);
+
+
+    }
+
+
+
+
+    @Override
+    public String toString() {
+        return "Usos{" +
+                "fechaAlquiler=" + fechaInicioAlquiler +
+                ", fechaEntrega=" + fechaFinEntrega +
+                ", importeApagar=" + importeApagar +
+                ", codigoProducto='" + codigoProducto + '\'' +
+                ", claveAlquiler='" + claveAlquiler + '\'' +
+                '}';
+    }
+
+    public void setCodigo(Producto producto){
+        this.codigoProducto=producto.getCodigo();
+
+    }
+    public void setClaveAlquiler(Producto producto,LocalDate FechaAlquiler){
+        this.claveAlquiler=producto.getCodigo()+String.valueOf(FechaAlquiler);
+    }
+
 }
+
+
+

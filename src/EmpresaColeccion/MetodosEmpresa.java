@@ -4,6 +4,8 @@ import ByCode.AnadirPorCodigo;
 import Excepciones.EntradaNull;
 import Interfaces.Bufferreader;
 import Productos.Producto;
+import Productos.ProductoAlquiler;
+import Productos.Usos;
 import Validaciones.Validaciones;
 
 import java.awt.*;
@@ -62,10 +64,44 @@ public class MetodosEmpresa implements Bufferreader {
 
     }
 
-    public void mostrarUsosProducto(){
+   public static boolean empresaExiste(ArrayList<Empresa> Listado,String empresaAbuscar){
+        boolean bandera=false;
+       for (Empresa empresa: Listado
+            ) {if(empresa.getNombreEmpresa().compareToIgnoreCase(empresaAbuscar)==0){
+                bandera=true;
+           break;
+          }
+       }
+       return bandera;
+   }
+public static void mostrarUsuos(String nombreEmoresa,ArrayList<Empresa> Listado) throws IOException {
+        Empresa emp= null;
+        String codigo;
+    ProductoAlquiler productoAlquiler=null;
+    for (Empresa empresa:Listado
+         ) {if(empresa.getNombreEmpresa().compareToIgnoreCase(nombreEmoresa)==0){
+             emp=empresa;
+    }
 
+    }
+    do{
+    System.out.println("Introducir el codigo");
+    codigo=br.readLine();
+    if(!Validaciones.validarCodigoAlquiler(codigo)) System.err.println("Intrduce un codigo valido para alquiler");
+    }while(!Validaciones.validarCodigoAlquiler(codigo));
+
+
+    for (Producto producto: emp.getListadoProductos()
+         ) {if (producto.getCodigo().compareToIgnoreCase(codigo)==0)productoAlquiler= (ProductoAlquiler) producto;
+    }
+    for (Usos usos: productoAlquiler.getListadoUsuos()
+         ) {
+        System.out.println(usos.toString());
+
+    }
     }
 
 
 
 }
+

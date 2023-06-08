@@ -5,7 +5,9 @@ import EmpresaColeccion.Empresa;
 import Productos.Producto;
 import Productos.ProductoAlquiler;
 import Productos.ProductoVenta;
+import Productos.Usos;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class AnadirPorCodigo {
@@ -28,6 +30,7 @@ public class AnadirPorCodigo {
 
 
         Empresa Ourense = new Empresa("A12345678A", "OurenseRent", "986102030");
+        Listado.add(Ourense);
         Ourense.getListadoProductos().add(new ProductoVenta("Leiro", "Small", "OurenseRent", 1200, Listado));
         Ourense.getListadoProductos().add(new ProductoVenta("Leiro", "Medium", "OurenseRent", 1500, Listado));
         Ourense.getListadoProductos().add(new ProductoVenta("Leiro", "Big", "OurenseRent", 1800, Listado));
@@ -40,7 +43,9 @@ public class AnadirPorCodigo {
         Ourense.getListadoProductos().add(new ProductoAlquiler("Beran", "Small", "OurenseRent", 15, 'L', Listado));
         Ourense.getListadoProductos().add(new ProductoAlquiler("Beran", "Medium", "OurenseRent", 25, 'L', Listado));
         Ourense.getListadoProductos().add(new ProductoAlquiler("Beran", "Big", "OurenseRent", 50, 'L', Listado));
-
-
+        ProductoAlquiler p = new ProductoAlquiler("Beran","Extra","OurenseRent",10,'L',Listado);
+        p.getListadoUsuos().add(new Usos(LocalDate.of(2000,1,3),LocalDate.of(2000,2,2),p));
+        p.getListadoUsuos().add(new Usos(LocalDate.of(2001,1,1),LocalDate.of(2001,2,1),p));
+        Ourense.getListadoProductos().add(p);
     }
 }

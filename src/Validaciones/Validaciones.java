@@ -3,6 +3,12 @@ package Validaciones;
 import Interfaces.Bufferreader;
 
 import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+import java.util.Locale;
 
 public class Validaciones implements Bufferreader {
     /*public static void main(String[] args) throws IOException {
@@ -61,4 +67,31 @@ public class Validaciones implements Bufferreader {
             }else return false;
 
     }
+
+    public static boolean validarCodigoAlquiler(String codigo){
+        return codigo.matches("^A\\d{3}$");
+    }
+    public static boolean validarCodigoAVenta(String codigo){
+        return codigo.matches("^V\\d{3}$");
+    }
+
+
+
+    public static LocalDate convertiFecha(String fecha){
+        String formato = "dd/MM/yyyy";
+         DateTimeFormatter formatter =DateTimeFormatter.ofPattern(formato);
+         try {
+             LocalDate fechaConvertida = LocalDate.parse(fecha,formatter);
+             return fechaConvertida;
+
+         }catch (DateTimeParseException e){
+             System.err.println("El formato de la fecha debe de ser "+formato);
+             return null;
+         }
+
+
+
+    }
+
+
 }
