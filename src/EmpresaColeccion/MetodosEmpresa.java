@@ -1,14 +1,13 @@
 package EmpresaColeccion;
 
-import ByCode.AnadirPorCodigo;
-import Excepciones.EntradaNull;
+
 import Interfaces.Bufferreader;
 import Productos.Producto;
 import Productos.ProductoAlquiler;
+import Productos.ProductoVenta;
 import Productos.Usos;
 import Validaciones.Validaciones;
 
-import java.awt.*;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -34,29 +33,27 @@ public class MetodosEmpresa implements Bufferreader {
         boolean bandera=true;
         boolean encotrado=false;
         String nombreEmpresa;
-        do{
-            System.out.println("En que empresa quieres registrar el producto\n");
-           PrintearEmpresas(Listado);
+        PrintearEmpresas(Listado);
+           do{
             nombreEmpresa=br.readLine();
+           }while(empresaExiste(Listado,nombreEmpresa));
+
         for (Empresa empresa: Listado
              ) {if(empresa.getNombreEmpresa().compareToIgnoreCase(nombreEmpresa)==0){
                  producto.setCif(empresa.getCif());
                     empresa.getListadoProductos().add(producto);
             System.out.println("Se ha añaddido el producoto "+producto.getModelo()+" a la empresa "+empresa.getNombreEmpresa());
-            encotrado=true;
+
         }
-        }
-        if(!encotrado){
-            System.err.println("Introduce un nombre de la lista");
-            bandera=false;
         }
 
-        }while(!bandera);
 
     }
 
     public static void PrintearEmpresas(ArrayList<Empresa> Listado){
-        System.out.println("Empresas existentes");
+
+        System.out.println("¿En que empresa desea realizar la gestion?\n" +
+                "Empresas existentes\n");
         for (Empresa empresa: Listado
         )
             System.out.println("->" + empresa.getNombreEmpresa() +"\n");
@@ -71,6 +68,10 @@ public class MetodosEmpresa implements Bufferreader {
                 bandera=true;
            break;
           }
+       }
+       if(!bandera){
+           System.err.println("Por favor indique una de las empresas de la lista\n");
+           PrintearEmpresas(Listado);
        }
        return bandera;
    }
@@ -100,6 +101,82 @@ public static void mostrarUsuos(String nombreEmoresa,ArrayList<Empresa> Listado)
 
     }
     }
+
+public static void printearProductosVenta(ArrayList<Empresa> Listado, String empresa){
+        Empresa emp = null;
+    for (Empresa e: Listado
+         ) {
+        if(e.getNombreEmpresa().compareToIgnoreCase(empresa)==0){
+             emp=e;
+    }
+
+    }
+    for (Producto p: emp.getListadoProductos()
+         ) {
+        if(p instanceof ProductoVenta){
+            System.out.println(((ProductoVenta) p).myVentaPrint());
+        }
+
+    }
+
+
+}
+
+public static boolean codigoExiste(ArrayList<Empresa> Listado ,String empresa , String codigo ){
+        boolean bandera=false;
+    for (Empresa e: Listado
+         ) {if(e.getNombreEmpresa().compareToIgnoreCase(empresa)==0){
+        for (Producto producto : e.getListadoProductos()
+             ) {if(producto.getCodigo().compareToIgnoreCase(codigo)==0){
+                 bandera=true;
+        }
+
+        }
+
+    }
+
+    }
+
+        if(!bandera) System.err.println("Debes seleccionar un codigo de la lista");
+       return bandera;
+}
+
+    public static void setPrecioVenta(ArrayList<Empresa> Listado ,String empresa , String codigo ) throws IOException {
+        ProductoVenta pv;
+        String  nuevoprecio;
+        for (Empresa e: Listado
+        ) {if(e.getNombreEmpresa().compareToIgnoreCase(empresa)==0){
+            for (Producto producto : e.getListadoProductos()
+            ) {if(producto.getCodigo().compareToIgnoreCase(codigo)==0){
+                pv= (ProductoVenta) producto;
+            }
+
+            }
+
+        }
+
+        }
+
+        System.out.println("Introducir nuevo precio de venta");
+
+        do {
+            nuevoprecio=br.readLine();
+            try {
+
+            }
+
+        }
+
+
+
+    }
+
+
+
+
+
+
+
 
 
 

@@ -11,7 +11,15 @@ import static Validaciones.Validaciones.*;
 
 public class Menu_Principal implements Bufferreader {
 
-    public static   String menu="Que operaccion desea realizar\n1->Registrar una empresa\n2->Gestionar productos\n3->Modificar un producto existente\n4->Alquiler de un producto\n5->Dar de baja un producto\n6->Creacion de ficheros\n0->Salir";
+    public static   String menu=
+            "Que operaccion desea realizar\n" +
+            "1->Registrar una empresa\n" +
+            "2->Gestionar productos\n" +
+            "3->Modificar un producto existente\n" +
+            "4->Alquiler de un producto\n" +
+            "5->Dar de baja un producto\n" +
+            "6->Creacion de ficheros\n" +
+            "0->Salir";
 
 
 

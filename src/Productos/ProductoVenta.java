@@ -81,6 +81,12 @@ public class ProductoVenta extends Producto implements Bufferreader {
                 ", cif='" + cif + '\'' +
                 '}';
     }
+
+
+    public String myVentaPrint(){
+
+        return "Codigo->"+getCodigo()+"Marca->"+getMarca()+"Modelo->"+getModelo()+"Precio de venta->"+getPrecioVenta();
+    }
 }
 
 

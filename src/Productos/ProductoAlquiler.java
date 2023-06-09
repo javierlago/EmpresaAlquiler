@@ -102,4 +102,13 @@ public ProductoAlquiler() throws IOException {
                 ", cif='" + cif + '\'' +
                 '}';
     }
+
+    public String myAlquilerPrint(){
+
+        return "Codigo->"+ getCodigo()+"Marca->"+getMarca()+"Precio dia->"+getPrecioDia()+"\n";
+    }
+
+
+
+
 }

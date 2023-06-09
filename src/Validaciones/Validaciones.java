@@ -1,20 +1,19 @@
 package Validaciones;
 
 import Interfaces.Bufferreader;
+import Productos.ProductoAlquiler;
+import Productos.Usos;
 
 import java.io.IOException;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
+
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
-import java.util.Locale;
+
+
 
 public class Validaciones implements Bufferreader {
-    /*public static void main(String[] args) throws IOException {
-        String caca = br.readLine();
-        System.out.println(InputEmpty(caca));
-    }*/
 
     public static boolean validarNombre(String nombre){return nombre.matches("^[A-Z][a-zA-Z]*$");}
     public static boolean InputEmpty(String string){return !string.isEmpty();}
@@ -72,6 +71,9 @@ public class Validaciones implements Bufferreader {
         return codigo.matches("^A\\d{3}$");
     }
     public static boolean validarCodigoAVenta(String codigo){
+        if(!codigo.matches("^V\\d{3}$")){
+            System.err.println("Codigo incorrexto debe de comenzar por una 'V' seguida de tres digitos");
+        }
         return codigo.matches("^V\\d{3}$");
     }
 
@@ -91,6 +93,15 @@ public class Validaciones implements Bufferreader {
 
 
 
+    }
+
+    public void verificarDisponibilidad(ProductoAlquiler productoAlquiler){
+        for (Usos usos : productoAlquiler.getListadoUsuos()
+                ) { if(usos.getFechaFinEntrega().isBefore(LocalDate.now())){
+                    productoAlquiler.setEstado('R');
+        }
+
+        }
     }
 
 

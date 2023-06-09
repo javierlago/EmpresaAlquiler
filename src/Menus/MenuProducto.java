@@ -25,6 +25,7 @@ public class MenuProducto implements Bufferreader {
                     "1->Registrar un Prodyucto para venta\n" +
                     "2->Registrar un Prouducto para alquiler\n" +
                     "3->Mostrar los usos de un producto en alquiler\n" +
+                    "4->Realizar modificaciones en productos\n" +
                     "0->Volver al menu principal");
             String respuesta;
             boolean bandera = true;
@@ -77,9 +78,7 @@ public class MenuProducto implements Bufferreader {
                                 }
 
                             }
-
                         }
-
                     }
                     MetodosEmpresa.mostrarUsuos(nombreEmpresa,Listado);
 
@@ -89,7 +88,7 @@ public class MenuProducto implements Bufferreader {
                 }
             }
 
-        } while (Validaciones.repetirProceso("Deseas añadir otro producto S-s/N-n"));
+        } while (Validaciones.repetirProceso("Deseas realizar otra operacion S-s/N-n"));
 
     }
 
