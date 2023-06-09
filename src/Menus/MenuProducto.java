@@ -4,6 +4,7 @@ import EmpresaColeccion.Empresa;
 import EmpresaColeccion.MetodosEmpresa;
 import Excepciones.OpcionMenu;
 import Interfaces.Bufferreader;
+import Productos.MetodosProducto;
 import Productos.Producto;
 import Productos.ProductoAlquiler;
 import Productos.ProductoVenta;
@@ -11,7 +12,6 @@ import Validaciones.Validaciones;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.StringTokenizer;
 
 import static EmpresaColeccion.MetodosEmpresa.anadirProductoAempresa;
 import static Validaciones.Validaciones.*;
@@ -80,7 +80,7 @@ public class MenuProducto implements Bufferreader {
                             }
                         }
                     }
-                    MetodosEmpresa.mostrarUsuos(nombreEmpresa,Listado);
+                    MetodosProducto.mostrarUsuos(nombreEmpresa,Listado);
 
                 }
                 case 0 -> {

@@ -68,6 +68,9 @@ public class Validaciones implements Bufferreader {
     }
 
     public static boolean validarCodigoAlquiler(String codigo){
+        if(!codigo.matches("^A\\d{3}$")){
+            System.err.println("Codigo incorrecto,debes introducir un codigo que empieze por 'A' seguido de tres digitos");
+        }
         return codigo.matches("^A\\d{3}$");
     }
     public static boolean validarCodigoAVenta(String codigo){

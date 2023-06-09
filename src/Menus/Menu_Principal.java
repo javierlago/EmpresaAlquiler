@@ -58,6 +58,11 @@ public class Menu_Principal implements Bufferreader {
                 MenuProducto.escogerProducto(Listado);
 
             }
+            case 3 ->{
+
+                MenuModificaciones.Modificaciones(Listado);
+
+            }
             case 0 ->{
                 System.out.println("Gracias y hasta pronto");
             }
