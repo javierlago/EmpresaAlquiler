@@ -3,6 +3,8 @@ package Menus;
 import EmpresaColeccion.*;
 import Excepciones.OpcionMenu;
 import Interfaces.Bufferreader;
+import Productos.MetodosProducto;
+import Productos.Usos;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -17,7 +19,7 @@ public class Menu_Principal implements Bufferreader {
             "2->Gestionar productos\n" +
             "3->Modificar un producto existente\n" +
             "4->Alquiler de un producto\n" +
-            "5->Dar de baja un producto\n" +
+            "5->Presupuesto\n" +
             "6->Creacion de ficheros\n" +
             "0->Salir";
 
@@ -32,18 +34,25 @@ public class Menu_Principal implements Bufferreader {
 
 
     public static void PrimerMenu(ArrayList<Empresa> Listado) throws IOException {
+        boolean repetir=true;
+
+        do{
         System.out.println(menu);
         String respuesta;
         boolean bandera=true;
         do{
             respuesta = br.readLine();
         try{
-            if(!isInt(respuesta)||!numCorrecto(respuesta)){throw new OpcionMenu();
+            if(!isInt(respuesta)||!numCorrecto(respuesta)){
+
+                throw new OpcionMenu();
             }
+            bandera=true;
         }catch (OpcionMenu e){
             System.err.println(e.getMessage());
             bandera=false;
         }
+
         }while (!bandera);
 
         switch (Integer.parseInt(respuesta)){
@@ -51,7 +60,7 @@ public class Menu_Principal implements Bufferreader {
             case 1 ->{
                 Empresa empresa = new Empresa();
                 Listado.add(empresa);
-                MetodosEmpresa.PrintearEmpresas(Listado);
+
             }
             case 2 ->{
 
@@ -62,12 +71,30 @@ public class Menu_Principal implements Bufferreader {
 
                 MenuModificaciones.Modificaciones(Listado);
 
+
+            }
+
+            case 4 -> {
+                String empresa;
+                String codigo;
+                do {
+                    MetodosEmpresa.PrintearEmpresas(Listado);
+                    empresa = br.readLine();
+                } while (MetodosEmpresa.empresaExiste(Listado,empresa));
+                MetodosProducto.printearProductosAlquiler(Listado,empresa);
+                do
+
+
             }
             case 0 ->{
-                System.out.println("Gracias y hasta pronto");
+                repetir=!repetirProceso("Seguro que desea salir S-s/N-n");
+
             }
 
         }
+
+
+        }while(repetir);
 
     }
 

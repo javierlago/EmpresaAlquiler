@@ -62,6 +62,11 @@ public class ProductoVenta extends Producto implements Bufferreader {
 
     }
 
+    @Override
+    public String mySpecialPrint() {
+        return "Codigo->"+getCodigo()+"Marca->"+getMarca()+"Modelo->"+getModelo()+"Precio de venta->"+getPrecioVenta();
+    }
+
 
     public float getPrecioVenta() {
         return precioVenta;
@@ -83,10 +88,7 @@ public class ProductoVenta extends Producto implements Bufferreader {
     }
 
 
-    public String myVentaPrint(){
 
-        return "Codigo->"+getCodigo()+"Marca->"+getMarca()+"Modelo->"+getModelo()+"Precio de venta->"+getPrecioVenta();
-    }
 }
 
 

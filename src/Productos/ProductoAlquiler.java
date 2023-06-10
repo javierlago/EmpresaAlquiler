@@ -92,6 +92,11 @@ public ProductoAlquiler() throws IOException {
 }
 
     @Override
+    public String mySpecialPrint() {
+        return "Codigo->"+ getCodigo()+"Marca->"+getMarca()+"Precio dia->"+getPrecioDia()+"\n";
+    }
+
+    @Override
     public String toString() {
         return "\nProductoAlquiler{" +
                 "precioDia=" + precioDia +
@@ -103,10 +108,7 @@ public ProductoAlquiler() throws IOException {
                 '}';
     }
 
-    public String myAlquilerPrint(){
 
-        return "Codigo->"+ getCodigo()+"Marca->"+getMarca()+"Precio dia->"+getPrecioDia()+"\n";
-    }
 
 
 

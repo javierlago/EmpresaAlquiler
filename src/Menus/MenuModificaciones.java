@@ -16,10 +16,11 @@ public class MenuModificaciones implements Bufferreader {
         String empresa;
         String respuesta;
         String codigo;
-        MetodosEmpresa.PrintearEmpresas(Listado);
         do{
+        do{
+         MetodosEmpresa.PrintearEmpresas(Listado);
          empresa = br.readLine();
-        }while(MetodosEmpresa.empresaExiste(Listado,empresa));
+        }while(!MetodosEmpresa.empresaExiste(Listado,empresa));
         System.out.println();
         System.out.println(
                 "Que gestion desea realizar\n" +
@@ -43,38 +44,51 @@ public class MenuModificaciones implements Bufferreader {
         switch (Integer.parseInt(respuesta)) {
 
             case 1 -> {
-                MetodosProducto.printearProductosVenta(Listado, empresa);
-                System.out.println("Introducir codigo de producto a modificar");
-                do{
-                    codigo=br.readLine();
-                    }while(!Validaciones.validarCodigoAVenta(codigo)|| !MetodosProducto.codigoVentaExiste(Listado,empresa,codigo));
 
-                MetodosProducto.setPrecioVenta(Listado,empresa,codigo);
+                if(MetodosProducto.tieneProductoVenta(MetodosEmpresa.encotrarEmpresa(Listado,empresa))) {
+                    MetodosProducto.printearProductosVenta(Listado, empresa);
+                    System.out.println("Introducir codigo de producto a modificar");
+                    do {
+                        codigo = br.readLine();
+                    } while (!Validaciones.validarCodigoAVenta(codigo) || !MetodosProducto.codigoVentaExiste(Listado, empresa, codigo));
+
+                    MetodosProducto.setPrecioVenta(Listado, empresa, codigo);
+
+
+                }else System.err.println("La empresa que has seleccionado no tiene productos en Venta");
+
             }
             case 2 ->{
-                MetodosProducto.printearProductosAlquiler(Listado,empresa);
-                System.out.println("Introducir el codigo del producto a modicicar");
-              do{
-                  codigo=br.readLine();
-              }while(!Validaciones.validarCodigoAlquiler(codigo)||!MetodosProducto.codigoAlquilerExiste(Listado,empresa,codigo));
-                MetodosProducto.setPrecioDia(Listado,empresa,codigo);
+
+                if(MetodosProducto.tieneProductoAlquiler(MetodosEmpresa.encotrarEmpresa(Listado,empresa))){
+                    MetodosProducto.printearProductosAlquiler(Listado,empresa);
+                    System.out.println("Introducir el codigo del producto a modicicar");
+                    do{
+                        codigo=br.readLine();
+                    }while(!Validaciones.validarCodigoAlquiler(codigo)||!MetodosProducto.codigoAlquilerExiste(Listado,empresa,codigo));
+                    MetodosProducto.setPrecioDia(Listado,empresa,codigo);
+
+                }else System.err.println("La empresa que has seleccionado no tiene ningun producto en alquiler");
+
 
             }
             case 3->{
+                if(MetodosProducto.tieneProductoAlquiler(MetodosEmpresa.encotrarEmpresa(Listado,empresa))){
                 do{
                     MetodosProducto.printearProductosAlquiler(Listado,empresa);
                     System.out.println("Introducir el codigo del producto a modicicar");
                     codigo=br.readLine();
                 }while(!Validaciones.validarCodigoAlquiler(codigo)||!MetodosProducto.codigoAlquilerExiste(Listado,empresa,codigo));
-            MetodosProducto.borrarUnProducto(Listado,empresa,codigo);
+                    MetodosProducto.borrarUnProducto(Listado,empresa,codigo);
 
-
+                }else System.err.println("La empresa que has seleccionado no tiene ningun producto en alquiler");
 
             }
 
 
 
         }
+    }while (Validaciones.repetirProceso("Desea relizar otra operacion S-s/N-n"));
     }
 
 

@@ -21,19 +21,22 @@ public class MenuProducto implements Bufferreader {
 
     public static void escogerProducto(ArrayList<Empresa> Listado) throws IOException {
         do {
-            System.out.println("Que tipo de producto desea registrar\n" +
-                    "1->Registrar un Prodyucto para venta\n" +
-                    "2->Registrar un Prouducto para alquiler\n" +
-                    "3->Mostrar los usos de un producto en alquiler\n" +
-                    "4->Realizar modificaciones en productos\n" +
-                    "0->Volver al menu principal");
+
             String respuesta;
             boolean bandera = true;
             do {
+                System.out.println("Que tipo de producto desea registrar\n" +
+                        "1->Registrar un Prodyucto para venta\n" +
+                        "2->Registrar un Prouducto para alquiler\n" +
+                        "3->Mostrar los usos de un producto en alquiler\n" +
+                        "0->Volver al menu principal");
                 respuesta = br.readLine();
                 try {
-                    if (!isInt(respuesta) || Integer.parseInt(respuesta) < 0 || Integer.parseInt(respuesta) > 3)
+                    if (!isInt(respuesta) || Integer.parseInt(respuesta) < 0 || Integer.parseInt(respuesta) > 3) {
                         throw new OpcionMenu();
+                    }
+                    bandera=true;
+
 
 
                 } catch (OpcionMenu e) {
@@ -65,6 +68,7 @@ public class MenuProducto implements Bufferreader {
                         nombreEmpresa = br.readLine();
                         if (!MetodosEmpresa.empresaExiste(Listado, nombreEmpresa)) {
                             System.err.println("Por favor introduce un nombre de la lista");
+                            MetodosEmpresa.PrintearEmpresas(Listado);
                         }
                     } while (!MetodosEmpresa.empresaExiste(Listado, nombreEmpresa));
                     System.out.println("Seleccione uno de los productos de alquiler que desea ver la lista de usos");
@@ -73,7 +77,7 @@ public class MenuProducto implements Bufferreader {
                         if (empresa.getNombreEmpresa().compareToIgnoreCase(nombreEmpresa) == 0) {
                             for (Producto producto : empresa.getListadoProductos()
                             ) {
-                                if (producto instanceof ProductoAlquiler) {
+                                if (producto instanceof ProductoAlquiler && !((ProductoAlquiler) producto).getListadoUsuos().isEmpty()) {
                                     System.out.println("Codigo->"+producto.getCodigo()+" Marca->"+producto.getMarca()+" Modelo->"+producto.getModelo()+"\n");
                                 }
 

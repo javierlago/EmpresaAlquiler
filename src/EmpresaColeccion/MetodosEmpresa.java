@@ -9,6 +9,17 @@ import java.util.ArrayList;
 
 public class MetodosEmpresa implements Bufferreader {
 
+    public static Empresa encotrarEmpresa(ArrayList<Empresa>Listado, String Nombreempresa){
+        Empresa empresa = null;
+        for (Empresa emp: Listado
+             ) { if(emp.getNombreEmpresa().compareToIgnoreCase(Nombreempresa)==0){
+                 empresa=emp;
+        }
+
+        }
+        return empresa;
+    }
+
 
 
         //Metodo para relacionar un producto con una empresa mediante el CIF
@@ -32,7 +43,7 @@ public class MetodosEmpresa implements Bufferreader {
         PrintearEmpresas(Listado);
            do{
             nombreEmpresa=br.readLine();
-           }while(empresaExiste(Listado,nombreEmpresa));
+           }while(!empresaExiste(Listado,nombreEmpresa));
 
         for (Empresa empresa: Listado
              ) {if(empresa.getNombreEmpresa().compareToIgnoreCase(nombreEmpresa)==0){
@@ -67,7 +78,7 @@ public class MetodosEmpresa implements Bufferreader {
        }
        if(!bandera){
            System.err.println("Por favor indique una de las empresas de la lista\n");
-           PrintearEmpresas(Listado);
+
        }
        return bandera;
    }

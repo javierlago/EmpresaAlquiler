@@ -36,8 +36,10 @@ public class Principal {
         }
 
     }*/
-        do{
+
         Menu_Principal.PrimerMenu(Listado);
-        }while(repetirProceso("Desea realizar otra operacion operacion S/N"));
+
+    System.out.println("Gracias y hasta pronto");
     }
+
 }
