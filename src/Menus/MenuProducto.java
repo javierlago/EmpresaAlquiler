@@ -61,16 +61,14 @@ public class MenuProducto implements Bufferreader {
                 }
                 case 3 -> {
 
-                    MetodosEmpresa.PrintearEmpresas(Listado);
                     String nombreEmpresa;
                     do {
+                        MetodosEmpresa.PrintearEmpresas(Listado);
                         System.out.println("Introduce el nombre de la empresa");
                         nombreEmpresa = br.readLine();
-                        if (!MetodosEmpresa.empresaExiste(Listado, nombreEmpresa)) {
-                            System.err.println("Por favor introduce un nombre de la lista");
-                            MetodosEmpresa.PrintearEmpresas(Listado);
-                        }
                     } while (!MetodosEmpresa.empresaExiste(Listado, nombreEmpresa));
+
+
                     System.out.println("Seleccione uno de los productos de alquiler que desea ver la lista de usos");
                     for (Empresa empresa : Listado
                     ) {

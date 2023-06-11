@@ -8,9 +8,6 @@ import java.io.IOException;
 
 
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
-
 
 
 public class Validaciones implements Bufferreader {
@@ -82,30 +79,7 @@ public class Validaciones implements Bufferreader {
 
 
 
-    public static LocalDate convertiFecha(String fecha){
-        String formato = "dd/MM/yyyy";
-         DateTimeFormatter formatter =DateTimeFormatter.ofPattern(formato);
-         try {
-             LocalDate fechaConvertida = LocalDate.parse(fecha,formatter);
-             return fechaConvertida;
 
-         }catch (DateTimeParseException e){
-             System.err.println("El formato de la fecha debe de ser "+formato);
-             return null;
-         }
-
-
-
-    }
-
-    public void verificarDisponibilidad(ProductoAlquiler productoAlquiler){
-        for (Usos usos : productoAlquiler.getListadoUsuos()
-                ) { if(usos.getFechaFinEntrega().isBefore(LocalDate.now())){
-                    productoAlquiler.setEstado('R');
-        }
-
-        }
-    }
 
 
 }

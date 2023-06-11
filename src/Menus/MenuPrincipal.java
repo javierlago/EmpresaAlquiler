@@ -74,8 +74,14 @@ public class MenuPrincipal implements Bufferreader {
             }
 
             case 4 -> {
-               MetodosProducto.alquilarProducto(Listado);
+                       MetodosProducto.alquilarProducto(Listado);
 
+
+            }
+            case 5 ->{
+                do{
+               MetodosProducto.calcularPresupuesto(Listado);
+                    }while(repetirProceso("Desea calcular el presupuesto de otro producto"));
 
             }
             case 0 ->{

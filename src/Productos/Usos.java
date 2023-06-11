@@ -6,7 +6,7 @@ import java.io.IOException;
 import java.io.Serializable;
 import java.time.LocalDate;
 
-import static Validaciones.Validaciones.convertiFecha;
+import static Fechas.MetodosFechas.convertiFecha;
 import static java.time.temporal.ChronoUnit.*;
 
 public class Usos implements Bufferreader, Serializable {

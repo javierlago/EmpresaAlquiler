@@ -38,8 +38,6 @@ public class MetodosEmpresa implements Bufferreader {
 
 //Metodo en el que se añade un producto a una empresa,por teclado, segun las empresas existentes.
     public static void anadirProductoAempresa(ArrayList<Empresa> Listado,  Producto producto) throws IOException {
-        boolean bandera=true;
-        boolean encotrado=false;
         String nombreEmpresa;
         PrintearEmpresas(Listado);
            do{
@@ -50,7 +48,7 @@ public class MetodosEmpresa implements Bufferreader {
              ) {if(empresa.getNombreEmpresa().compareToIgnoreCase(nombreEmpresa)==0){
                  producto.setCif(empresa.getCif());
                     empresa.getListadoProductos().add(producto);
-            System.out.println("Se ha añaddido el producoto "+producto.getModelo()+" a la empresa "+empresa.getNombreEmpresa());
+            System.out.println("Se ha añaddido el producto "+producto.mySpecialPrint());
 
         }
         }
