@@ -3,14 +3,8 @@ import java.util.ArrayList;
 
 import ByCode.*;
 import EmpresaColeccion.Empresa;
-import Menus.Menu_Principal;
-import Productos.Producto;
-import Productos.ProductoAlquiler;
-import EmpresaColeccion.MetodosEmpresa;
-import Productos.ProductoVenta;
-import Validaciones.Validaciones;
+import Menus.MenuPrincipal;
 
-import static Validaciones.Validaciones.*;
 public class Principal {
 
 
@@ -37,7 +31,7 @@ public class Principal {
 
     }*/
 
-        Menu_Principal.PrimerMenu(Listado);
+        MenuPrincipal.PrimerMenu(Listado);
 
     System.out.println("Gracias y hasta pronto");
     }

@@ -70,6 +70,7 @@ public class Usos implements Bufferreader, Serializable {
     }
 
     public Usos(ProductoAlquiler productoAlquiler) throws IOException {
+        setClaveAlquiler(productoAlquiler, fechaInicioAlquiler);
         String fecha=null;
         do{
             System.out.println("Indique la fecha de  inicio del alquiler");
@@ -83,7 +84,7 @@ public class Usos implements Bufferreader, Serializable {
         setFechaFinEntrega(convertiFecha(fecha));
         setCodigo(productoAlquiler);
         setImporteApagar(this.fechaInicioAlquiler,this.fechaFinEntrega,productoAlquiler);
-
+        setClaveAlquiler(productoAlquiler, fechaInicioAlquiler);
 
     }
 
@@ -106,7 +107,7 @@ public class Usos implements Bufferreader, Serializable {
 
     }
     public void setClaveAlquiler(Producto producto,LocalDate FechaAlquiler){
-        this.claveAlquiler=producto.getCodigo()+String.valueOf(FechaAlquiler);
+        this.claveAlquiler=producto.getCodigo()+"-"+String.valueOf(FechaAlquiler);
     }
 
 }

@@ -24,6 +24,7 @@ public class MenuModificaciones implements Bufferreader {
         System.out.println();
         System.out.println(
                 "Que gestion desea realizar\n" +
+                "0->Volver al menu principal\n" +
                 "1->Modificcar un precio de venta\n" +
                 "2->Modificar el precio de alquiler por dia\n" +
                 "3->Dar de baja un producto de alquiler");
@@ -84,7 +85,9 @@ public class MenuModificaciones implements Bufferreader {
                 }else System.err.println("La empresa que has seleccionado no tiene ningun producto en alquiler");
 
             }
-
+            case 0 -> {
+                MenuPrincipal.PrimerMenu(Listado);
+            }
 
 
         }

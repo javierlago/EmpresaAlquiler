@@ -2,6 +2,7 @@ package EmpresaColeccion;
 
 
 import Interfaces.Bufferreader;
+import Productos.MetodosProducto;
 import Productos.Producto;
 
 import java.io.IOException;
@@ -68,6 +69,24 @@ public class MetodosEmpresa implements Bufferreader {
 
     }
 
+    public static void PrintearEmpresasConProductosLibres(ArrayList<Empresa> Listado){
+
+        System.out.println("¿En que empresa desea realizar la gestion?\n" +
+                "Empresas existentes\n");
+        for (Empresa empresa: Listado
+        )
+            if(MetodosProducto.tieneProductoAlquilerLibres(empresa)){
+                System.out.println("->" + empresa.getNombreEmpresa() +"\n");
+            }
+
+
+
+    }
+
+
+
+
+
    public static boolean empresaExiste(ArrayList<Empresa> Listado,String empresaAbuscar){
         boolean bandera=false;
        for (Empresa empresa: Listado
@@ -82,7 +101,20 @@ public class MetodosEmpresa implements Bufferreader {
        }
        return bandera;
    }
+    public static boolean empresaPrroductosLibresExiste(ArrayList<Empresa> Listado,String empresaAbuscar){
+        boolean bandera=false;
+        for (Empresa empresa: Listado
+        ) {if(empresa.getNombreEmpresa().compareToIgnoreCase(empresaAbuscar)==0&& MetodosProducto.tieneProductoAlquilerLibres(empresa)){
+            bandera=true;
+            break;
+        }
+        }
+        if(!bandera){
+            System.err.println("Por favor indique una de las empresas de la lista\n");
 
+        }
+        return bandera;
+    }
 
 }
 

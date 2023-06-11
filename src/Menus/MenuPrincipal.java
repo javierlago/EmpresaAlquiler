@@ -4,14 +4,13 @@ import EmpresaColeccion.*;
 import Excepciones.OpcionMenu;
 import Interfaces.Bufferreader;
 import Productos.MetodosProducto;
-import Productos.Usos;
 
 import java.io.IOException;
 import java.util.ArrayList;
 
 import static Validaciones.Validaciones.*;
 
-public class Menu_Principal implements Bufferreader {
+public class MenuPrincipal implements Bufferreader {
 
     public static   String menu=
             "Que operaccion desea realizar\n" +
@@ -75,14 +74,7 @@ public class Menu_Principal implements Bufferreader {
             }
 
             case 4 -> {
-                String empresa;
-                String codigo;
-                do {
-                    MetodosEmpresa.PrintearEmpresas(Listado);
-                    empresa = br.readLine();
-                } while (MetodosEmpresa.empresaExiste(Listado,empresa));
-                MetodosProducto.printearProductosAlquiler(Listado,empresa);
-                do
+               MetodosProducto.alquilarProducto(Listado);
 
 
             }

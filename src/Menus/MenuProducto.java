@@ -88,7 +88,7 @@ public class MenuProducto implements Bufferreader {
 
                 }
                 case 0 -> {
-                    Menu_Principal.PrimerMenu(Listado);
+                    MenuPrincipal.PrimerMenu(Listado);
                 }
             }
 
