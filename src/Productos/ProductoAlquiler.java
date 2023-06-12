@@ -93,7 +93,7 @@ public ProductoAlquiler() throws IOException {
 
     @Override
     public String mySpecialPrint() {
-        return "Codigo->"+ getCodigo()+"Marca->"+getMarca()+"Precio dia->"+getPrecioDia()+"\n";
+        return "Codigo->"+ getCodigo()+" Marca->"+getMarca()+" Precio dia->"+getPrecioDia()+"\n";
     }
 
     @Override

@@ -58,9 +58,8 @@ public class Validaciones implements Bufferreader {
                 System.err.println("Introduce una respuesta correcta");
                 bandera=false;}
         }while(!bandera);
-            if(respuesta.compareToIgnoreCase("s")==0){
-                return true;
-            }else return false;
+
+            return respuesta.compareToIgnoreCase("s") == 0;
 
     }
 

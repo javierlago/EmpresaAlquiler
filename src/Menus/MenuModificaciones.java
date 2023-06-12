@@ -7,12 +7,13 @@ import Interfaces.Bufferreader;
 import Productos.MetodosProducto;
 import Validaciones.Validaciones;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 
 public class MenuModificaciones implements Bufferreader {
 
-    public static void Modificaciones(ArrayList<Empresa> Listado) throws IOException {
+    public static void Modificaciones(ArrayList<Empresa> Listado, File file) throws IOException {
         String empresa;
         String respuesta;
         String codigo;
@@ -39,7 +40,7 @@ public class MenuModificaciones implements Bufferreader {
         }catch (OpcionMenu e){
             System.err.println(e.getMessage());
         }
-        }while(!Validaciones.isInt(respuesta)||Integer.parseInt(respuesta)<1||Integer.parseInt(respuesta)>3||respuesta.isEmpty());
+        }while(!Validaciones.isInt(respuesta)||Integer.parseInt(respuesta)<0||Integer.parseInt(respuesta)>3||respuesta.isEmpty());
 
 
         switch (Integer.parseInt(respuesta)) {
@@ -86,7 +87,7 @@ public class MenuModificaciones implements Bufferreader {
 
             }
             case 0 -> {
-                MenuPrincipal.PrimerMenu(Listado);
+                MenuPrincipal.PrimerMenu(Listado,file);
             }
 
 

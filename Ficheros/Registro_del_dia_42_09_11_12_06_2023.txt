@@ -1,0 +1,2 @@
+Se ha añadido el producto->Codigo->V025 Marca->MarcaMarca Modelo->ModeloModelo Precio de venta->1200.0
+aOurenseRent

@@ -102,5 +102,9 @@ public class Empresa implements Serializable,Bufferreader {
         System.out.println("Empresa registrada con existo");
     }
 
+    @Override
+    public String toString() {
+        return "Empresa->"+nombreEmpresa+" Numero de telefono->"+numTelfono+" CIF->"+cif;
+    }
 }
 

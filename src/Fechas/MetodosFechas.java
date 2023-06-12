@@ -4,6 +4,7 @@ import Productos.ProductoAlquiler;
 import Productos.Usos;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.time.temporal.ChronoUnit;
@@ -42,6 +43,10 @@ public class MetodosFechas {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         return fecha.format(formatter);
     }
+    public static String formatearFechaHora(LocalDateTime fechaHora){
+        DateTimeFormatter dateTimeFormatter= DateTimeFormatter.ofPattern("ss_mm_HH_dd_MM_yyyy");
 
+        return fechaHora.format(dateTimeFormatter);
+    }
 
 }

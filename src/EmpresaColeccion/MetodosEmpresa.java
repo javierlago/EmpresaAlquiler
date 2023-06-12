@@ -10,6 +10,19 @@ import java.util.ArrayList;
 
 public class MetodosEmpresa implements Bufferreader {
 
+    public static String getNameEmpresaByCif(String Cif,ArrayList<Empresa> listado){
+        String nombreAbuscar=null;
+        for (Empresa empresa : listado
+             ) { if(empresa.getCif().compareToIgnoreCase(Cif)==0){
+                 nombreAbuscar=empresa.getNombreEmpresa();
+        }
+
+        }
+        return nombreAbuscar;
+    }
+
+
+
     public static Empresa encotrarEmpresa(ArrayList<Empresa>Listado, String Nombreempresa){
         Empresa empresa = null;
         for (Empresa emp: Listado

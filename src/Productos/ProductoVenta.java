@@ -64,7 +64,7 @@ public class ProductoVenta extends Producto implements Bufferreader {
 
     @Override
     public String mySpecialPrint() {
-        return "Codigo->"+getCodigo()+"Marca->"+getMarca()+"Modelo->"+getModelo()+"Precio de venta->"+getPrecioVenta();
+        return "Codigo->"+getCodigo()+" Marca->"+getMarca()+" Modelo->"+getModelo()+" Precio de venta->"+getPrecioVenta()+"\n";
     }
 
 

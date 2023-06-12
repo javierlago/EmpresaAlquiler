@@ -1,10 +1,12 @@
 package Menus;
 
+import CreacionFicheros.CreateFile;
 import EmpresaColeccion.*;
 import Excepciones.OpcionMenu;
 import Interfaces.Bufferreader;
 import Productos.MetodosProducto;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -32,7 +34,7 @@ public class MenuPrincipal implements Bufferreader {
 
 
 
-    public static void PrimerMenu(ArrayList<Empresa> Listado) throws IOException {
+    public static void PrimerMenu(ArrayList<Empresa> Listado, File file) throws IOException {
         boolean repetir=true;
 
         do{
@@ -59,16 +61,18 @@ public class MenuPrincipal implements Bufferreader {
             case 1 ->{
                 Empresa empresa = new Empresa();
                 Listado.add(empresa);
+                System.out.println("Se ha creado la "+empresa.toString()+"\n");
+                CreateFile.trackInfo(file,"Se ha creado la "+empresa.toString()+"\n");
 
             }
             case 2 ->{
 
-                MenuProducto.escogerProducto(Listado);
+                MenuProducto.escogerProducto(Listado,file);
 
             }
             case 3 ->{
 
-                MenuModificaciones.Modificaciones(Listado);
+                MenuModificaciones.Modificaciones(Listado,file);
 
 
             }
@@ -84,7 +88,15 @@ public class MenuPrincipal implements Bufferreader {
                     }while(repetirProceso("Desea calcular el presupuesto de otro producto"));
 
             }
+
+            case 6 ->{
+                do{
+                MenuListados.Listados(Listado,file);
+                }while(repetirProceso("Desea visualizar algun dato mas S-s/N-n "));
+            }
+
             case 0 ->{
+
                 repetir=!repetirProceso("Seguro que desea salir S-s/N-n");
 
             }

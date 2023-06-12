@@ -1,5 +1,6 @@
 package Menus;
 
+import CreacionFicheros.CreateFile;
 import EmpresaColeccion.Empresa;
 import EmpresaColeccion.MetodosEmpresa;
 import Excepciones.OpcionMenu;
@@ -10,16 +11,18 @@ import Productos.ProductoAlquiler;
 import Productos.ProductoVenta;
 import Validaciones.Validaciones;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 
 import static EmpresaColeccion.MetodosEmpresa.anadirProductoAempresa;
+import static EmpresaColeccion.MetodosEmpresa.empresaExiste;
 import static Validaciones.Validaciones.*;
 
 
 public class MenuProducto implements Bufferreader {
 
-    public static void escogerProducto(ArrayList<Empresa> Listado) throws IOException {
+    public static void escogerProducto(ArrayList<Empresa> Listado, File file) throws IOException {
         do {
 
             String respuesta;
@@ -50,6 +53,8 @@ public class MenuProducto implements Bufferreader {
                 case 1 -> {
                     ProductoVenta productoVenta = new ProductoVenta();
                     anadirProductoAempresa(Listado, productoVenta);
+                    String empresa= MetodosEmpresa.getNameEmpresaByCif(productoVenta.getCif(),Listado);
+                    CreateFile.trackInfo(file,"Se ha añadido el producto->"+productoVenta.mySpecialPrint()+"a"+empresa);
 
 
                 }
@@ -62,6 +67,7 @@ public class MenuProducto implements Bufferreader {
                 case 3 -> {
 
                     String nombreEmpresa;
+                    boolean muestra = false;
                     do {
                         MetodosEmpresa.PrintearEmpresas(Listado);
                         System.out.println("Introduce el nombre de la empresa");
@@ -69,24 +75,28 @@ public class MenuProducto implements Bufferreader {
                     } while (!MetodosEmpresa.empresaExiste(Listado, nombreEmpresa));
 
 
-                    System.out.println("Seleccione uno de los productos de alquiler que desea ver la lista de usos");
+
                     for (Empresa empresa : Listado
                     ) {
                         if (empresa.getNombreEmpresa().compareToIgnoreCase(nombreEmpresa) == 0) {
+                            System.out.println("Seleccione uno de los productos de alquiler que desea ver la lista de usos");
                             for (Producto producto : empresa.getListadoProductos()
                             ) {
-                                if (producto instanceof ProductoAlquiler && !((ProductoAlquiler) producto).getListadoUsuos().isEmpty()) {
+
+                                if (producto instanceof ProductoAlquiler && !((ProductoAlquiler) producto).getListadoUsuos().isEmpty()&& !empresa.getListadoProductos().isEmpty()) {
                                     System.out.println("Codigo->"+producto.getCodigo()+" Marca->"+producto.getMarca()+" Modelo->"+producto.getModelo()+"\n");
+                                    muestra=true;
                                 }
 
                             }
                         }
                     }
-                    MetodosProducto.mostrarUsuos(nombreEmpresa,Listado);
+                  if(muestra){ MetodosProducto.mostrarUsuos(nombreEmpresa,Listado);}else System.err.println("La empresa que has seleccionado no tiene producotos");
+
 
                 }
                 case 0 -> {
-                    MenuPrincipal.PrimerMenu(Listado);
+                    MenuPrincipal.PrimerMenu(Listado,file);
                 }
             }
 
