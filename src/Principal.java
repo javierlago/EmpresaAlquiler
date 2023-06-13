@@ -21,9 +21,6 @@ public class Principal {
         File file = createFile.createTxtFile("Registro_"+formatearFechaHora(LocalDateTime.now()));
         ArrayList<Empresa> Listado  =new ArrayList<>();
         AnadirPorCodigo.anadirEmpresas(Listado,file);
-        ListadoEmpresas lista = new ListadoEmpresas();
-        lista.setListadoEmpresas(Listado);
-        createFile.crearListadoEmpresarGson(lista);
         System.out.println("Bienvenidos a Patinetes Galica SL");
         MenuPrincipal.PrimerMenu(Listado,file);
         System.out.println("Gracias y hasta pronto");

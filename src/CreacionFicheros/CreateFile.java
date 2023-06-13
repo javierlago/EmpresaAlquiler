@@ -17,20 +17,10 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 public class CreateFile implements Bufferreader {
- /* public static void main(String[] args) throws IOException {
-       newFile newFile = new newFile();
-       newFile.createXMLfile("Automatico");
-       newFile.createDatFile("Automatico");
-       newFile.createJsontFile("Automatico");
-       newFile.createTxtFile("Automatico");
-       newFile.createTxtFile();
-       newFile.createXMLfile();
-       newFile.createDatFile();
-       newFile.createJsonFile();
-   }*/
 
 
-    public  String directoryPath= "Ficheros\\",endData=".dat",endJson=".json",endXml=".xml",endTxt=".txt",date=String.valueOf(LocalDate.now());
+
+    public static String directoryPath= "Ficheros\\",endData=".dat",endJson=".json",endXml=".xml",endTxt=".txt",date=String.valueOf(LocalDate.now());
 
 
     public  File createXMLfile(String fileName) throws IOException {
@@ -90,13 +80,13 @@ public class CreateFile implements Bufferreader {
 
 
 
-    public File createJsontFile(String fileName) throws IOException {
+    public static File createJsontFile(String fileName) throws IOException {
         File fileJson= new File(directoryPath+fileName+endJson);
         if(!fileJson.exists())fileJson.createNewFile();
         return fileJson;
     }
 
-    public File createJsonFile()  {
+    public static File createJsonFile()  {
         boolean flag = false;
         File jsonFile = null;
         do {
@@ -153,10 +143,9 @@ public class CreateFile implements Bufferreader {
 
     }
 
-    public void crearListadoEmpresarGson(ListadoEmpresas listado)throws IOException,FileNotFoundException{
-        Gson gson = new GsonBuilder().setPrettyPrinting().registerTypeAdapter(LocalDateTime.class, new LocalDateTimeAdapter()).create();
-
-        try (FileWriter writer = new FileWriter(createJsonFile())) {
+    public static void crearListadoEmpresarGson(ListadoEmpresas listado)throws IOException,FileNotFoundException{
+        Gson gson = new GsonBuilder().setPrettyPrinting().excludeFieldsWithoutExposeAnnotation().create();
+        try (FileWriter writer = new FileWriter(createJsontFile("ListadoDeEmpresas"))) {
             gson.toJson(listado, writer);
             String json = gson.toJson(listado);
             System.out.printf(json);
@@ -169,6 +158,25 @@ public class CreateFile implements Bufferreader {
 
 
     }
+
+    public static void crearListadoEmpresarGson(Empresa empresa,String nombreEmpresa)throws IOException,FileNotFoundException{
+        Gson gson = new GsonBuilder().setPrettyPrinting().excludeFieldsWithoutExposeAnnotation().create();
+        try (FileWriter writer = new FileWriter(createJsontFile(nombreEmpresa))) {
+            gson.toJson(empresa, writer);
+            String json = gson.toJson(empresa);
+            System.out.printf(json);
+        }catch(FileNotFoundException e){
+            System.err.println(e.getMessage());
+
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+
+    }
+
+
+
     public static void pasarAxml(XStream xstream, ListadoEmpresas Lista , File archivoXML) throws FileNotFoundException {
         xstream.alias("ListadoEmpresas", ListadoEmpresas.class);
         xstream.alias("Empresa",Empresa.class);

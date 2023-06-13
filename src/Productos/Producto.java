@@ -1,5 +1,5 @@
 package Productos;
-
+import com.google.gson.annotations.Expose;
 public abstract class Producto {
 
     public Producto(){
@@ -14,13 +14,13 @@ public abstract class Producto {
 
     }
 
-
+    @Expose
    static int numeroCodigo=0;
 
     public static int getNumeroCodigo() {
         return numeroCodigo++;
     }
-
+    @Expose
     String codigo,marca,modelo,cif;
     public String getCodigo() {
         return codigo;
