@@ -44,7 +44,7 @@ public class MetodosFechas {
         return fecha.format(formatter);
     }
     public static String formatearFechaHora(LocalDateTime fechaHora){
-        DateTimeFormatter dateTimeFormatter= DateTimeFormatter.ofPattern("ss_mm_HH_dd_MM_yyyy");
+        DateTimeFormatter dateTimeFormatter= DateTimeFormatter.ofPattern("'dia'(dd-MM-yyyy)'hora'(HH'horas'-mm'min'-ss'seg')");
 
         return fechaHora.format(dateTimeFormatter);
     }

@@ -81,7 +81,7 @@ public class MenuModificaciones implements Bufferreader {
                     System.out.println("Introducir el codigo del producto a modicicar");
                     codigo=br.readLine();
                 }while(!Validaciones.validarCodigoAlquiler(codigo)||!MetodosProducto.codigoAlquilerExiste(Listado,empresa,codigo));
-                    MetodosProducto.borrarUnProducto(Listado,empresa,codigo);
+                    MetodosProducto.borrarUnProducto(Listado,empresa,codigo,file);
 
                 }else System.err.println("La empresa que has seleccionado no tiene ningun producto en alquiler");
 

@@ -21,7 +21,8 @@ public class MenuPrincipal implements Bufferreader {
             "3->Modificar un producto existente\n" +
             "4->Alquiler de un producto\n" +
             "5->Presupuesto\n" +
-            "6->Creacion de ficheros\n" +
+            "6->Consulta de datos\n" +
+            "7->Creacion de archivos\n" +
             "0->Salir";
 
 
@@ -78,13 +79,13 @@ public class MenuPrincipal implements Bufferreader {
             }
 
             case 4 -> {
-                       MetodosProducto.alquilarProducto(Listado);
+                       MetodosProducto.alquilarProducto(Listado,file);
 
 
             }
             case 5 ->{
                 do{
-               MetodosProducto.calcularPresupuesto(Listado);
+               MetodosProducto.calcularPresupuesto(Listado,file);
                     }while(repetirProceso("Desea calcular el presupuesto de otro producto"));
 
             }
@@ -93,6 +94,11 @@ public class MenuPrincipal implements Bufferreader {
                 do{
                 MenuListados.Listados(Listado,file);
                 }while(repetirProceso("Desea visualizar algun dato mas S-s/N-n "));
+            }
+            case 7 ->{
+
+                MenuArchivos.CrearArchivo(Listado);
+
             }
 
             case 0 ->{

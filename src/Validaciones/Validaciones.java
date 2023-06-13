@@ -43,7 +43,7 @@ public class Validaciones implements Bufferreader {
         }
 
         public static boolean numCorrecto(String numero){
-            return(Integer.parseInt(numero)>=0 && Integer.parseInt(numero)<=6);
+            return(Integer.parseInt(numero)>=0 && Integer.parseInt(numero)<=7);
 
 
         }

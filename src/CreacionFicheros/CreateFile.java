@@ -1,13 +1,20 @@
 package CreacionFicheros;
 
+import EmpresaColeccion.Empresa;
 import Excepciones.EntradaNull;
 
 import Interfaces.Bufferreader;
+import Productos.ProductoAlquiler;
+import Productos.ProductoVenta;
+import Productos.Usos;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.thoughtworks.xstream.XStream;
 
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
 
 public class CreateFile implements Bufferreader {
  /* public static void main(String[] args) throws IOException {
@@ -23,7 +30,7 @@ public class CreateFile implements Bufferreader {
    }*/
 
 
-    public   String directoryPath= "Ficheros\\",endData=".dat",endJson=".json",endXml=".xml",endTxt=".txt",date=String.valueOf(LocalDate.now());
+    public  String directoryPath= "Ficheros\\",endData=".dat",endJson=".json",endXml=".xml",endTxt=".txt",date=String.valueOf(LocalDate.now());
 
 
     public  File createXMLfile(String fileName) throws IOException {
@@ -144,9 +151,46 @@ public class CreateFile implements Bufferreader {
         writer.write(mensaje);
         writer.close();
 
+    }
 
+    public void crearListadoEmpresarGson(ListadoEmpresas listado)throws IOException,FileNotFoundException{
+        Gson gson = new GsonBuilder().setPrettyPrinting().registerTypeAdapter(LocalDateTime.class, new LocalDateTimeAdapter()).create();
+
+        try (FileWriter writer = new FileWriter(createJsonFile())) {
+            gson.toJson(listado, writer);
+            String json = gson.toJson(listado);
+            System.out.printf(json);
+        }catch(FileNotFoundException e){
+            System.err.println(e.getMessage());
+
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
 
 
     }
+    public static void pasarAxml(XStream xstream, ListadoEmpresas Lista , File archivoXML) throws FileNotFoundException {
+        xstream.alias("ListadoEmpresas", ListadoEmpresas.class);
+        xstream.alias("Empresa",Empresa.class);
+        xstream.alias("ProductoAlquiler", ProductoAlquiler.class);
+        xstream.alias("ProductoVenta", ProductoVenta.class);
+        xstream.alias("Uso", Usos.class);
+        xstream.toXML(Lista,new FileOutputStream(archivoXML));
+
+        String Listado = xstream.toXML(Lista);
+        System.out.printf(Listado);
+        System.out.println("\nSe ha creado xml");
+
+    }
+    public static void pasarUnaEmpresaAxml(XStream xstream, Empresa empresa , File archivoXML) throws FileNotFoundException {
+        xstream.alias("Empresa",Empresa.class);
+        xstream.alias("ProductoAlquiler", ProductoAlquiler.class);
+        xstream.alias("ProductoVenta", ProductoVenta.class);
+        xstream.alias("Uso", Usos.class);
+        xstream.toXML(empresa,new FileOutputStream(archivoXML));
+        String Listado = xstream.toXML(empresa);
+
+    }
+
 
 }

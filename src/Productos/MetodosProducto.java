@@ -1,5 +1,6 @@
 package Productos;
 
+import CreacionFicheros.CreateFile;
 import EmpresaColeccion.Empresa;
 import EmpresaColeccion.MetodosEmpresa;
 import Excepciones.MayorQueCero;
@@ -9,6 +10,7 @@ import Validaciones.Validaciones;
 import static Fechas.MetodosFechas.*;
 import static Validaciones.Validaciones.validarCodigoAlquiler;
 
+import java.io.File;
 import java.io.IOException;
 
 import java.time.LocalDate;
@@ -288,7 +290,7 @@ public class MetodosProducto implements Bufferreader {
     }
 
 
-    public static void borrarUnProducto(ArrayList<Empresa> Listado, String empresa, String codigo) throws IOException {
+    public static void borrarUnProducto(ArrayList<Empresa> Listado, String empresa, String codigo,File file) throws IOException {
         Empresa emp = null;
 
         int num = -1;
@@ -308,14 +310,16 @@ public class MetodosProducto implements Bufferreader {
         System.out.println("Se va a eliminar el producto " + emp.getListadoProductos().get(num).mySpecialPrint());
 
         if (Validaciones.repetirProceso("Estas seguro? S-s/N-n")) {
-            System.out.println("Se ha borrado " + emp.getListadoProductos().get(num).mySpecialPrint());
+            String mensaje="Se ha borrado " + emp.getListadoProductos().get(num).mySpecialPrint();
+            System.out.println(mensaje);
+            CreateFile.trackInfo(file,mensaje);
             emp.getListadoProductos().remove(num);
         } else System.out.println("El producto no se ha borrado");
 
     }
 
 
-    public static void alquilarProducto(ArrayList<Empresa> listado) throws IOException {
+    public static void alquilarProducto(ArrayList<Empresa> listado, File file) throws IOException {
         String nombreEmpresa;
         String codigo;
        /* Primero se verifica el nombre de la empresa(solo se muestran empresas
@@ -344,7 +348,9 @@ public class MetodosProducto implements Bufferreader {
                         if (Validaciones.repetirProceso("Estas seguro? S-s/N-n")) {
                             ((ProductoAlquiler) producto).getListadoUsuos().add(uso);
                             ((ProductoAlquiler) producto).setEstado('R');
-                            System.out.println("Se ha registrado un alquiler en el producto" + producto.mySpecialPrint() + "\nCon las siguientes caracteristicas\n" + uso.toString() + "\n");
+                            String mensje="Se ha registrado un alquiler en el producto" + producto.mySpecialPrint() + "\nCon las siguientes caracteristicas\n" + uso.toString() + "\n";
+                            System.out.println(mensje);
+                            CreateFile.trackInfo(file,mensje);
                         } else System.out.println("El producto no se a alquilado");
 
                     }
@@ -356,7 +362,7 @@ public class MetodosProducto implements Bufferreader {
         }
     }
 
-    public static void calcularPresupuesto(ArrayList<Empresa> listado) throws IOException {
+    public static void calcularPresupuesto(ArrayList<Empresa> listado,File file) throws IOException {
         String nombreEmpresa;
         String codigo;
         LocalDate fechaIncio,fechaEntrega;
@@ -394,8 +400,12 @@ public class MetodosProducto implements Bufferreader {
 
 
                         System.out.println("La empresa "+empresa.getNombreEmpresa()+"\nLe alquilara el producto "+producto.mySpecialPrint()+"\nEntre los dias "+formatearFecha(fechaIncio)+
-                                " y "+formatearFecha(fechaEntrega)+" por un valor de "+(calculardias(fechaIncio,fechaEntrega)* ((ProductoAlquiler) producto).precioDia+" Euros")
-                        );
+                                " y "+formatearFecha(fechaEntrega)+" por un valor de "+(calculardias(fechaIncio,fechaEntrega)* ((ProductoAlquiler) producto).precioDia+" Euros"));
+
+                                CreateFile.trackInfo(file,"Se ha calculado un presupuesto para el productos->"+producto.mySpecialPrint()+
+                                        "con un presupuesto de "+(calculardias(fechaIncio,fechaEntrega)* ((ProductoAlquiler) producto).precioDia+
+                                        "para la Empresa->"+empresa.getNombreEmpresa()));
+
 
 
 

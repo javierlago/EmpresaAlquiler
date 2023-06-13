@@ -1,11 +1,13 @@
 package Productos;
 
+import CreacionFicheros.CreateFile;
 import EmpresaColeccion.Empresa;
 import EmpresaColeccion.MetodosEmpresa;
 import Excepciones.EntradaNull;
 import Excepciones.NombreCorrecto;
 import Interfaces.Bufferreader;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -16,11 +18,12 @@ public class ProductoVenta extends Producto implements Bufferreader {
 
 
     float precioVenta;
-    public ProductoVenta(String marca, String modelo, String nombreEmpresa, float precioVenta, ArrayList<Empresa> Listado) {
+    public ProductoVenta(String marca, String modelo, String nombreEmpresa, float precioVenta, ArrayList<Empresa> Listado, File file) throws IOException {
         super(marca, modelo, nombreEmpresa);
         this.precioVenta = precioVenta;
         setCodigo("V"+String.format("%03d",getNumeroCodigo()));
         setCif(MetodosEmpresa.cifSegunEmpresa(nombreEmpresa,Listado));
+        CreateFile.trackInfo(file,"Se ha añadido el producto->"+mySpecialPrint()+"a la empresa -> "+nombreEmpresa+"\n");
     }
 
     public ProductoVenta() throws IOException {

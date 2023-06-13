@@ -54,14 +54,15 @@ public class MenuProducto implements Bufferreader {
                     ProductoVenta productoVenta = new ProductoVenta();
                     anadirProductoAempresa(Listado, productoVenta);
                     String empresa= MetodosEmpresa.getNameEmpresaByCif(productoVenta.getCif(),Listado);
-                    CreateFile.trackInfo(file,"Se ha añadido el producto->"+productoVenta.mySpecialPrint()+"a"+empresa);
+                    CreateFile.trackInfo(file,"Se ha añadido el producto->"+productoVenta.mySpecialPrint()+"a la empresa -> "+empresa+"\n");
 
 
                 }
                 case 2 -> {
                     ProductoAlquiler productoAlquiler = new ProductoAlquiler();
                     anadirProductoAempresa(Listado, productoAlquiler);
-
+                    String empresa= MetodosEmpresa.getNameEmpresaByCif(productoAlquiler.getCif(),Listado);
+                    CreateFile.trackInfo(file,"Se ha añadido el producto->"+productoAlquiler.mySpecialPrint()+"a la empresa -> "+empresa+"\n");
 
                 }
                 case 3 -> {
@@ -84,8 +85,9 @@ public class MenuProducto implements Bufferreader {
                             ) {
 
                                 if (producto instanceof ProductoAlquiler && !((ProductoAlquiler) producto).getListadoUsuos().isEmpty()&& !empresa.getListadoProductos().isEmpty()) {
-                                    System.out.println("Codigo->"+producto.getCodigo()+" Marca->"+producto.getMarca()+" Modelo->"+producto.getModelo()+"\n");
+                                    System.out.println(producto.mySpecialPrint());
                                     muestra=true;
+                                    CreateFile.trackInfo(file,"Se ha accedido al historial de usos del proucto"+producto.mySpecialPrint()+"en la empresa "+nombreEmpresa+"\n");
                                 }
 
                             }

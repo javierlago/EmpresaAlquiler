@@ -1,5 +1,6 @@
 package Productos;
 
+import CreacionFicheros.CreateFile;
 import EmpresaColeccion.Empresa;
 import EmpresaColeccion.MetodosEmpresa;
 import Excepciones.EntradaNull;
@@ -7,21 +8,22 @@ import Excepciones.NombreCorrecto;
 import Interfaces.Bufferreader;
 import Validaciones.Validaciones;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import static Fechas.MetodosFechas.calculardias;
 import static Validaciones.Validaciones.*;
 
 public class ProductoAlquiler extends Producto implements Bufferreader {
+
+    float precioDia;
+    char estado;
     ArrayList<Usos> listadoUsuos= new ArrayList<>();
 
     public ArrayList<Usos> getListadoUsuos() {
         return listadoUsuos;
     }
-
-
-    float precioDia;
-char estado;
 
     public float getPrecioDia() {
         return precioDia;
@@ -39,12 +41,15 @@ char estado;
         this.estado = estado;
     }
 
-    public ProductoAlquiler( String marca, String modelo,String nombreEmpresa,float precioDia,char estado, ArrayList<Empresa> Listado) {
+    public ProductoAlquiler(String marca, String modelo, String nombreEmpresa, float precioDia, char estado, ArrayList<Empresa> Listado, File file) throws IOException {
         super(marca, modelo,nombreEmpresa);
         this.precioDia=precioDia;
         this.estado=estado;
         setCodigo("A"+ String.format("%03d",getNumeroCodigo()));
         setCif(MetodosEmpresa.cifSegunEmpresa(nombreEmpresa,Listado));
+        CreateFile.trackInfo(file,"Se ha añadido el producto->"+mySpecialPrint()+"a la empresa -> "+nombreEmpresa+"\n");
+
+
     }
 
 public ProductoAlquiler() throws IOException {

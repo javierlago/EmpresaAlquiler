@@ -1,5 +1,6 @@
 package EmpresaColeccion;
 
+import CreacionFicheros.CreateFile;
 import Excepciones.CifInvalido;
 import Excepciones.EntradaNull;
 import Excepciones.NombreCorrecto;
@@ -7,6 +8,7 @@ import Excepciones.TelefonoInvalido;
 import Interfaces.Bufferreader;
 import Productos.*;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -49,10 +51,11 @@ public class Empresa implements Serializable,Bufferreader {
     String cif, nombreEmpresa, numTelfono;
     ArrayList<Producto> ListadoProductos = new ArrayList<>();
 
-    public Empresa(String cif, String nombreEmpresa, String numTelfono) {
+    public Empresa(String cif, String nombreEmpresa, String numTelfono, File file) throws IOException {
         this.cif = cif;
         this.nombreEmpresa = nombreEmpresa;
         this.numTelfono = numTelfono;
+        CreateFile.trackInfo(file,"Se ha creado la "+toString()+"\n");
     }
 
     public Empresa() throws IOException {

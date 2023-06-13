@@ -5,8 +5,10 @@ import java.util.ArrayList;
 
 import ByCode.*;
 import CreacionFicheros.CreateFile;
+import CreacionFicheros.ListadoEmpresas;
 import EmpresaColeccion.Empresa;
 import Menus.MenuPrincipal;
+import com.thoughtworks.xstream.XStream;
 
 import static Fechas.MetodosFechas.*;
 
@@ -14,34 +16,20 @@ public class Principal {
 
 
     public static void main(String[] args) throws IOException {
-
-        CreateFile CreateFile = new CreateFile();
-        File file = CreateFile.createTxtFile("Registro_del_dia_"+formatearFechaHora(LocalDateTime.now()));
+        XStream xStream=new XStream();
+        CreateFile createFile = new CreateFile();
+        File file = createFile.createTxtFile("Registro_"+formatearFechaHora(LocalDateTime.now()));
         ArrayList<Empresa> Listado  =new ArrayList<>();
-        AnadirPorCodigo.anadirEmpresas(Listado);
+        AnadirPorCodigo.anadirEmpresas(Listado,file);
+        ListadoEmpresas lista = new ListadoEmpresas();
+        lista.setListadoEmpresas(Listado);
+        createFile.crearListadoEmpresarGson(lista);
         System.out.println("Bienvenidos a Patinetes Galica SL");
-       /* ProductoVenta pv = new ProductoVenta();
-       ProductoAlquiler pa = new ProductoAlquiler();
-        ProductoAlquiler pa11 = new ProductoAlquiler();
-        //ProductoVenta pv1 = new ProductoVenta();
-       // ProductoAlquiler pa1 = new ProductoAlquiler();
-
-        //MetodosEmpresa.anadirProductoAempresa(Listado,pv);
-       MetodosEmpresa.anadirProductoAempresa(Listado,pa);
-        MetodosEmpresa.anadirProductoAempresa(Listado,pa11);
-        //MetodosEmpresa.anadirProductoAempresa(Listado,pv1);
-        //MetodosEmpresa.anadirProductoAempresa(Listado,pa1);
-
-        for (Empresa emp : Listado
-        ) {
-            System.out.println(emp.getListadoProductos().toString());
-        }
-
-    }*/
-
         MenuPrincipal.PrimerMenu(Listado,file);
+        System.out.println("Gracias y hasta pronto");
 
-    System.out.println("Gracias y hasta pronto");
+
+
     }
 
 }

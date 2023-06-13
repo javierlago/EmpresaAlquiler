@@ -12,7 +12,8 @@ import static java.time.temporal.ChronoUnit.*;
 public class Usos implements Bufferreader, Serializable {
 
 
-    LocalDate fechaInicioAlquiler, fechaFinEntrega;
+    LocalDate fechaInicioAlquiler;
+    LocalDate fechaFinEntrega;
     float importeApagar;
     String codigoProducto;
     String claveAlquiler;
