@@ -28,8 +28,6 @@ public class Principal {
         MenuPrincipal.PrimerMenu(Listado,file);
         System.out.println("Gracias y hasta pronto");
 
-
-
     }
 
 }
