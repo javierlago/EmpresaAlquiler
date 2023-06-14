@@ -1,7 +1,6 @@
 package Productos;
-
 import Interfaces.Bufferreader;
-
+import com.google.gson.annotations.Expose;
 import java.io.IOException;
 import java.io.Serializable;
 import java.time.LocalDate;
@@ -13,12 +12,18 @@ public class Usos implements Bufferreader, Serializable {
 
 
     LocalDate fechaInicioAlquiler;
-    LocalDate fechaFinEntrega;
-    float importeApagar;
-    String codigoProducto;
-    String claveAlquiler;
 
-    public LocalDate getFechaInicioAlquiler() {
+    LocalDate fechaFinEntrega;
+    @Expose
+    public float importeApagar;
+    @Expose
+    public String codigoProducto;
+    @Expose
+    public String claveAlquiler;
+    @Expose
+    String InicioAlqu,FinAlqu;
+
+    private LocalDate getFechaInicioAlquiler() {
         return fechaInicioAlquiler;
     }
 
@@ -68,6 +73,8 @@ public class Usos implements Bufferreader, Serializable {
         setCodigo(producto);
         setImporteApagar(fechaInicioAlquiler, fechaFinEntrega,producto);
         setClaveAlquiler(producto, fechaInicioAlquiler);
+        InicioAlqu=String.valueOf(fechaInicioAlquiler);
+        FinAlqu=String.valueOf(fechaFinEntrega);
     }
 
     public Usos(ProductoAlquiler productoAlquiler) throws IOException {
@@ -86,7 +93,8 @@ public class Usos implements Bufferreader, Serializable {
         setCodigo(productoAlquiler);
         setImporteApagar(this.fechaInicioAlquiler,this.fechaFinEntrega,productoAlquiler);
         setClaveAlquiler(productoAlquiler, fechaInicioAlquiler);
-
+        InicioAlqu=String.valueOf(fechaInicioAlquiler);
+        FinAlqu=String.valueOf(fechaFinEntrega);
     }
 
 

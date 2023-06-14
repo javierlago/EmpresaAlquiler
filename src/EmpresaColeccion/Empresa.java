@@ -7,6 +7,7 @@ import Excepciones.NombreCorrecto;
 import Excepciones.TelefonoInvalido;
 import Interfaces.Bufferreader;
 import Productos.*;
+import com.google.gson.annotations.Expose;
 
 import java.io.File;
 import java.io.IOException;
@@ -47,8 +48,9 @@ public class Empresa implements Serializable,Bufferreader {
     public void setListadoProductos(ArrayList<Producto> listadoProductos) {
         ListadoProductos = listadoProductos;
     }
-
+    @Expose
     String cif, nombreEmpresa, numTelfono;
+    @Expose
     ArrayList<Producto> ListadoProductos = new ArrayList<>();
 
     public Empresa(String cif, String nombreEmpresa, String numTelfono, File file) throws IOException {

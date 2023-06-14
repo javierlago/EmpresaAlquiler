@@ -7,6 +7,7 @@ import Excepciones.EntradaNull;
 import Excepciones.NombreCorrecto;
 import Interfaces.Bufferreader;
 import Validaciones.Validaciones;
+import com.google.gson.annotations.Expose;
 
 import java.io.File;
 import java.io.IOException;
@@ -16,9 +17,64 @@ import static Fechas.MetodosFechas.calculardias;
 import static Validaciones.Validaciones.*;
 
 public class ProductoAlquiler extends Producto implements Bufferreader {
+    public ProductoAlquiler(String marca, String modelo, String nombreEmpresa, float precioDia, char estado, ArrayList<Empresa> Listado, File file) throws IOException {
+        super(marca, modelo,nombreEmpresa);
+        this.precioDia=precioDia;
+        this.estado=estado;
+        setCodigo("A"+ String.format("%03d",getNumeroCodigo()));
+        setCif(MetodosEmpresa.cifSegunEmpresa(nombreEmpresa,Listado));
+        CreateFile.trackInfo(file,"Se ha añadido el producto->"+mySpecialPrint()+"a la empresa -> "+nombreEmpresa+"\n");
 
+
+    }
+    public ProductoAlquiler() throws IOException {
+
+        setCodigo("A"+ String.format("%03d", getNumeroCodigo()));
+        this.estado='L';
+        do {
+            System.out.println("Introducir la marca del producto");
+            this.marca=br.readLine();
+            try{
+                if(!InputEmpty(marca))throw new EntradaNull();
+                if(!validarNombre(marca))throw new NombreCorrecto();
+
+            }catch (EntradaNull | NombreCorrecto e){
+                System.err.println(e.getMessage());
+            }
+        }while(!InputEmpty(marca)|| !validarNombre(marca));
+        do{
+            System.out.println("Introducir el nombre de la modelo");
+            this.modelo=br.readLine();
+            try{
+                if(!InputEmpty(modelo))throw new EntradaNull();
+                if(!validarNombre(modelo))throw new NombreCorrecto();
+
+            }catch (EntradaNull | NombreCorrecto e){
+                System.err.println(e.getMessage());
+            }
+        }while(!InputEmpty(modelo)|| !validarNombre(modelo));
+        do{
+            boolean bandera=false;
+            do{
+                System.out.println("Introducir el precio por dia");
+                String precioDia=br.readLine();
+                if(isFloat(precioDia)){this.precioDia=Float.parseFloat(precioDia);
+                    bandera=true;
+                }else System.err.println("Debes de introducir un precio correcto");
+            }while(!bandera);
+        }while (!floatNoNegativo(precioDia)||!InputEmpty(String.valueOf(precioDia)));
+
+
+
+
+
+
+    }
+    @Expose
     float precioDia;
+    @Expose
     char estado;
+    @Expose
     ArrayList<Usos> listadoUsuos= new ArrayList<>();
 
     public ArrayList<Usos> getListadoUsuos() {
@@ -41,60 +97,9 @@ public class ProductoAlquiler extends Producto implements Bufferreader {
         this.estado = estado;
     }
 
-    public ProductoAlquiler(String marca, String modelo, String nombreEmpresa, float precioDia, char estado, ArrayList<Empresa> Listado, File file) throws IOException {
-        super(marca, modelo,nombreEmpresa);
-        this.precioDia=precioDia;
-        this.estado=estado;
-        setCodigo("A"+ String.format("%03d",getNumeroCodigo()));
-        setCif(MetodosEmpresa.cifSegunEmpresa(nombreEmpresa,Listado));
-        CreateFile.trackInfo(file,"Se ha añadido el producto->"+mySpecialPrint()+"a la empresa -> "+nombreEmpresa+"\n");
-
-
-    }
-
-public ProductoAlquiler() throws IOException {
-
-    setCodigo("A"+ String.format("%03d", getNumeroCodigo()));
-    this.estado='L';
-    do {
-        System.out.println("Introducir la marca del producto");
-        this.marca=br.readLine();
-        try{
-            if(!InputEmpty(marca))throw new EntradaNull();
-            if(!validarNombre(marca))throw new NombreCorrecto();
-
-        }catch (EntradaNull | NombreCorrecto e){
-            System.err.println(e.getMessage());
-        }
-    }while(!InputEmpty(marca)|| !validarNombre(marca));
-    do{
-        System.out.println("Introducir el nombre de la modelo");
-        this.modelo=br.readLine();
-        try{
-            if(!InputEmpty(modelo))throw new EntradaNull();
-            if(!validarNombre(modelo))throw new NombreCorrecto();
-
-        }catch (EntradaNull | NombreCorrecto e){
-            System.err.println(e.getMessage());
-        }
-    }while(!InputEmpty(modelo)|| !validarNombre(modelo));
-    do{
-        boolean bandera=false;
-        do{
-        System.out.println("Introducir el precio por dia");
-        String precioDia=br.readLine();
-        if(isFloat(precioDia)){this.precioDia=Float.parseFloat(precioDia);
-            bandera=true;
-        }else System.err.println("Debes de introducir un precio correcto");
-        }while(!bandera);
-    }while (!floatNoNegativo(precioDia)||!InputEmpty(String.valueOf(precioDia)));
 
 
 
-
-
-
-}
 
     @Override
     public String mySpecialPrint() {

@@ -6,6 +6,7 @@ import EmpresaColeccion.MetodosEmpresa;
 import Excepciones.EntradaNull;
 import Excepciones.NombreCorrecto;
 import Interfaces.Bufferreader;
+import com.google.gson.annotations.Expose;
 
 import java.io.File;
 import java.io.IOException;
@@ -16,7 +17,7 @@ import static Validaciones.Validaciones.floatNoNegativo;
 
 public class ProductoVenta extends Producto implements Bufferreader {
 
-
+    @Expose
     float precioVenta;
     public ProductoVenta(String marca, String modelo, String nombreEmpresa, float precioVenta, ArrayList<Empresa> Listado, File file) throws IOException {
         super(marca, modelo, nombreEmpresa);
