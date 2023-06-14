@@ -14,6 +14,7 @@ import java.util.ArrayList;
 
 import static CreacionFicheros.CreateFile.crearListadoEmpresarGson;
 import static CreacionFicheros.CreateFile.pasarUnaEmpresaAxml;
+import static Validaciones.Validaciones.opcionMenu;
 
 public class MenuArchivos implements Bufferreader {
     public static void CrearArchivo(ArrayList<Empresa> listado) throws IOException {
@@ -26,27 +27,20 @@ public class MenuArchivos implements Bufferreader {
         Empresa empresa;
         empresa = null;
         do{
-            System.out.println("Que tipo de archivo quieres generar" +
-                    "1->Crear un archivo XML de una empresa" +
-                    "2->Crear un archivo Json de una empresa" +
-                    "3->Crear un archivo XML de todas las empresas" +
-                    "4->Crear un archivo Json de todas las empresar" +
-                    "0->Volver a al menu principal");
+            System.out.println("Que tipo de archivo quieres generar\n" +
+                    "1->Crear un archivo XML de una empresa\n" +
+                    "2->Crear un archivo Json de una empresa\n" +
+                    "3->Crear un archivo XML de todas las empresas\n" +
+                    "4->Crear un archivo Json de todas las empresar\n" +
+                    "0->Volver a al menu principal\n");
             respuesta=br.readLine();
-            try {
-                if(!Validaciones.isInt(respuesta)||Integer.parseInt(respuesta)<0||Integer.parseInt(respuesta)>4){
-                    throw new OpcionMenu();
-                }
-            } catch (OpcionMenu e) {
-                System.out.println(e.getMessage());
-            }
-        }while(!Validaciones.isInt(respuesta)||Integer.parseInt(respuesta)<0||Integer.parseInt(respuesta)>4);
+
+        }while(!opcionMenu(respuesta,4));
         switch (Integer.parseInt(respuesta)){
             case 1->{
                 System.out.println("De que empresa desea realizar el archivo");
                 do{
                     MetodosEmpresa.PrintearEmpresas(listado);
-                    System.out.println("->Todas");
                     nombreEmpresa=br.readLine();
                 }while(!MetodosEmpresa.empresaExiste(listado,nombreEmpresa));
 
@@ -66,7 +60,6 @@ public class MenuArchivos implements Bufferreader {
                 System.out.println("De que empresa desea realizar el archivo");
                 do{
                     MetodosEmpresa.PrintearEmpresas(listado);
-                    System.out.println("->Todas");
                     nombreEmpresa=br.readLine();
                 }while(!MetodosEmpresa.empresaExiste(listado,nombreEmpresa));
                 for (Empresa e : listado
@@ -80,7 +73,7 @@ public class MenuArchivos implements Bufferreader {
 
             }
             case 3 ->{
-                cf.pasarAxml(xStream,listadoEmpresas,cf.createXMLfile("ListadoEmpresas"));
+                CreateFile.pasarAxml(xStream,listadoEmpresas,cf.createXMLfile("ListadoEmpresas"));
             }
             case 4 ->{
 

@@ -19,6 +19,17 @@ public class ProductoVenta extends Producto implements Bufferreader {
 
     @Expose
     float precioVenta;
+
+    /**
+     * Constructor de un producto de venta paramentrizado
+     * @param marca String que indica la marca del producto.
+     * @param modelo String que indica el modelo de producto.
+     * @param nombreEmpresa String Que indica el nombre de la empresa.
+     * @param precioVenta Float en el que se indeca el precio de venta.
+     * @param Listado ArrayList en el que se encuentran todas las empresas.
+     * @param file Archivo en el que se guardara un registro de la creacion  del producto de la empresa.
+     * @throws IOException -
+     */
     public ProductoVenta(String marca, String modelo, String nombreEmpresa, float precioVenta, ArrayList<Empresa> Listado, File file) throws IOException {
         super(marca, modelo, nombreEmpresa);
         this.precioVenta = precioVenta;
@@ -27,6 +38,10 @@ public class ProductoVenta extends Producto implements Bufferreader {
         CreateFile.trackInfo(file,"Se ha añadido el producto->"+mySpecialPrint()+"a la empresa -> "+nombreEmpresa+"\n");
     }
 
+    /**
+     * Constuctor de un producto de venta en el que se le piden los datos al usuario.
+     * @throws IOException
+     */
     public ProductoVenta() throws IOException {
         super();
         setCodigo("V"+String.format("%03d",getNumeroCodigo()));

@@ -2,7 +2,6 @@ package Menus;
 
 import CreacionFicheros.CreateFile;
 import EmpresaColeccion.*;
-import Excepciones.OpcionMenu;
 import Interfaces.Bufferreader;
 import Productos.MetodosProducto;
 
@@ -41,29 +40,16 @@ public class MenuPrincipal implements Bufferreader {
         do{
         System.out.println(menu);
         String respuesta;
-        boolean bandera=true;
         do{
             respuesta = br.readLine();
-        try{
-            if(!isInt(respuesta)||!numCorrecto(respuesta)){
-
-                throw new OpcionMenu();
-            }
-            bandera=true;
-        }catch (OpcionMenu e){
-            System.err.println(e.getMessage());
-            bandera=false;
-        }
-
-        }while (!bandera);
+        }while (!opcionMenu(respuesta,7));
 
         switch (Integer.parseInt(respuesta)){
 
             case 1 ->{
                 Empresa empresa = new Empresa();
                 Listado.add(empresa);
-                System.out.println("Se ha creado la "+empresa.toString()+"\n");
-                CreateFile.trackInfo(file,"Se ha creado la "+empresa.toString()+"\n");
+                CreateFile.trackInfo(file,"Se ha creado la "+empresa+"\n");
 
             }
             case 2 ->{

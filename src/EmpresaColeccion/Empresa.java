@@ -53,6 +53,14 @@ public class Empresa implements Serializable,Bufferreader {
     @Expose
     ArrayList<Producto> ListadoProductos = new ArrayList<>();
 
+    /**
+     * Constructor de empresa parametrizado
+     * @param cif CIF de la empresa
+     * @param nombreEmpresa Nombre que tendara la empresa
+     * @param numTelfono Numero de telefono de la Empresa
+     * @param file Archivo en el que se guardara el registro de que se ha creado un Empresa
+     * @throws IOException -
+     */
     public Empresa(String cif, String nombreEmpresa, String numTelfono, File file) throws IOException {
         this.cif = cif;
         this.nombreEmpresa = nombreEmpresa;
@@ -60,6 +68,10 @@ public class Empresa implements Serializable,Bufferreader {
         CreateFile.trackInfo(file,"Se ha creado la "+toString()+"\n");
     }
 
+    /**
+     * Constructor de empresa en la que se piden los datos por teclado
+     * @throws IOException -
+     */
     public Empresa() throws IOException {
         do {
             System.out.println("Indique nombre de la empresa");
@@ -104,7 +116,7 @@ public class Empresa implements Serializable,Bufferreader {
         } while (!InputEmpty(numTelfono) || !validaTlf(numTelfono));
 
 
-        System.out.println("Empresa registrada con existo");
+        System.out.println(this +" registrada con existo");
     }
 
     @Override

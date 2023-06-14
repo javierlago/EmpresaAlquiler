@@ -4,8 +4,10 @@ import com.google.gson.annotations.Expose;
 import java.io.IOException;
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.Objects;
 
 import static Fechas.MetodosFechas.convertiFecha;
+import static Fechas.MetodosFechas.*;
 import static java.time.temporal.ChronoUnit.*;
 
 public class Usos implements Bufferreader, Serializable {
@@ -65,7 +67,12 @@ public class Usos implements Bufferreader, Serializable {
     }
 
 
-    // Constructores
+    /**
+     * Constuctot parametrizado de un uso
+     * @param fechaInicioAlquiler LocalDate en el que se indica el inicio de un alquiler
+     * @param fechaFinEntrega LocalDate que indica cuando se debe de acabar el alquiler del producto
+     * @param producto Objetro producto que sera usado para calcular el costo de este alquiler.
+     */
 
     public Usos(LocalDate fechaInicioAlquiler, LocalDate fechaFinEntrega, ProductoAlquiler producto) {
         this.fechaInicioAlquiler = fechaInicioAlquiler;
@@ -77,18 +84,24 @@ public class Usos implements Bufferreader, Serializable {
         FinAlqu=String.valueOf(fechaFinEntrega);
     }
 
+    /**
+     * Constructor en el que se le pide por teclado los datos al usuario.
+     * @param productoAlquiler
+     * @throws IOException
+     */
     public Usos(ProductoAlquiler productoAlquiler) throws IOException {
         setClaveAlquiler(productoAlquiler, fechaInicioAlquiler);
         String fecha=null;
+
         do{
             System.out.println("Indique la fecha de  inicio del alquiler");
             fecha=br.readLine();
-        }while(convertiFecha(fecha)==null);
+        }while(convertiFecha(fecha)==null||!isAfter(LocalDate.now(),convertiFecha(fecha)));
         setFechaInicioAlquiler(convertiFecha(fecha));
         do{
             System.out.println("Indique la fecha del  fin del alquiler");
             fecha=br.readLine();
-        }while(convertiFecha(fecha)==null);
+        }while(convertiFecha(fecha)==null||!isAfter(getFechaInicioAlquiler(),(convertiFecha(fecha))));
         setFechaFinEntrega(convertiFecha(fecha));
         setCodigo(productoAlquiler);
         setImporteApagar(this.fechaInicioAlquiler,this.fechaFinEntrega,productoAlquiler);

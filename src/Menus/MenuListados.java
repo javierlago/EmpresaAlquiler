@@ -12,7 +12,20 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import static Validaciones.Validaciones.opcionMenu;
+
+/**
+ * @author Javier Lago Amoedo
+ * @apiNote Con esta clase podremos gestionar los listados que deseamos consultar
+ */
+
 public class MenuListados implements Bufferreader {
+    /**
+     * Metodo para acceder a la visualizacion de los datos almacenados
+     * @param listado Listado de empresas
+     * @param file Archivo en el que se guardara el registro de las consultas realizadas
+     * @throws IOException
+     */
     public static void Listados(ArrayList<Empresa> listado, File file) throws IOException {
         String respuesta;
         String nombreEmpresa;
@@ -25,19 +38,7 @@ public class MenuListados implements Bufferreader {
 
         do{
             respuesta=br.readLine();
-            try {
-                if(!Validaciones.isInt(respuesta)){
-                    throw new MayorQueCero();
-                }
-                if(Integer.parseInt(respuesta)<0||Integer.parseInt(respuesta)>2){
-                    throw new OpcionMenu();
-                }
-            }catch(MayorQueCero |OpcionMenu mqc){
-                System.err.println(mqc.getMessage());
-            }
-        }while(!Validaciones.isInt(respuesta)|| Integer.parseInt(respuesta)<0||Integer.parseInt(respuesta)>2);
-
-
+        }while(!opcionMenu(respuesta,2));
 
         switch (Integer.parseInt(respuesta)){
 

@@ -2,7 +2,6 @@ package Menus;
 
 import EmpresaColeccion.Empresa;
 import EmpresaColeccion.MetodosEmpresa;
-import Excepciones.OpcionMenu;
 import Interfaces.Bufferreader;
 import Productos.MetodosProducto;
 import Validaciones.Validaciones;
@@ -10,6 +9,8 @@ import Validaciones.Validaciones;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+
+import static Validaciones.Validaciones.*;
 
 public class MenuModificaciones implements Bufferreader {
 
@@ -32,15 +33,7 @@ public class MenuModificaciones implements Bufferreader {
 
         do{
         respuesta= br.readLine();
-        try{
-            Validaciones.isInt(respuesta);
-            if(!Validaciones.isInt(respuesta)||Integer.parseInt(respuesta)<1||Integer.parseInt(respuesta)>3||respuesta.isEmpty()){
-                throw new OpcionMenu();
-            }
-        }catch (OpcionMenu e){
-            System.err.println(e.getMessage());
-        }
-        }while(!Validaciones.isInt(respuesta)||Integer.parseInt(respuesta)<0||Integer.parseInt(respuesta)>3||respuesta.isEmpty());
+        }while(!opcionMenu(respuesta,3));
 
 
         switch (Integer.parseInt(respuesta)) {

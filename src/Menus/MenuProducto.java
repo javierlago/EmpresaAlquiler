@@ -16,7 +16,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import static EmpresaColeccion.MetodosEmpresa.anadirProductoAempresa;
-import static EmpresaColeccion.MetodosEmpresa.empresaExiste;
 import static Validaciones.Validaciones.*;
 
 
@@ -26,7 +25,6 @@ public class MenuProducto implements Bufferreader {
         do {
 
             String respuesta;
-            boolean bandera = true;
             do {
                 System.out.println("Que tipo de producto desea registrar\n" +
                         "1->Registrar un Prodyucto para venta\n" +
@@ -34,19 +32,7 @@ public class MenuProducto implements Bufferreader {
                         "3->Mostrar los usos de un producto en alquiler\n" +
                         "0->Volver al menu principal");
                 respuesta = br.readLine();
-                try {
-                    if (!isInt(respuesta) || Integer.parseInt(respuesta) < 0 || Integer.parseInt(respuesta) > 3) {
-                        throw new OpcionMenu();
-                    }
-                    bandera=true;
-
-
-
-                } catch (OpcionMenu e) {
-                    System.err.println(e.getMessage());
-                    bandera = false;
-                }
-            } while (!bandera);
+            } while (!opcionMenu(respuesta,3));
 
             switch (Integer.parseInt(respuesta)) {
 
@@ -70,7 +56,7 @@ public class MenuProducto implements Bufferreader {
                     String nombreEmpresa;
                     boolean muestra = false;
                     do {
-                        MetodosEmpresa.PrintearEmpresas(Listado);
+                        MetodosEmpresa.PrintearEmpresasConProductosAlquilerConUsos(Listado);
                         System.out.println("Introduce el nombre de la empresa");
                         nombreEmpresa = br.readLine();
                     } while (!MetodosEmpresa.empresaExiste(Listado, nombreEmpresa));

@@ -16,18 +16,34 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
+/**
+ * @author Javier Lago Amoedo
+ * @apiNote
+ * Clase en la que se encuentran metodos en los que se pueden crear archivos de tipo XML,Json,txt,dat;
+ */
 public class CreateFile implements Bufferreader {
 
 
 
     public static String directoryPath= "Ficheros\\",endData=".dat",endJson=".json",endXml=".xml",endTxt=".txt",date=String.valueOf(LocalDate.now());
 
-
+    /**
+     * Metodo para crear un archivo XML con el nombre que se le pase por parametro,este archivo solo se creara si no existe.
+     * @param fileName Nombre que tendra el archivo creado
+     * @return Devuelve un archivo con extension xml y el nombre del parametri fileName
+     * @throws IOException
+     */
     public  File createXMLfile(String fileName) throws IOException {
         File fileXML= new File(directoryPath+fileName+endXml);
         if(!fileXML.exists())fileXML.createNewFile();
         return fileXML;
     }
+    /**
+     * Metodo para crear un archivo XML con el nombre que se le pase por parametro
+     *
+     *@return
+     * @throws IOException
+     */
     public  File createXMLfile()  {
         boolean flag = false;
         File fileXML = null;
@@ -78,7 +94,12 @@ public class CreateFile implements Bufferreader {
     }
 
 
-
+    /**
+     * Metodo para crear un archivo Json con el nombre que se le pasa por parametro y solo se creara si no existia previamente.
+     * @param fileName
+     * @return Devuelve un File con el nombre indicado por parameteo.
+     * @throws IOException
+     */
 
     public static File createJsontFile(String fileName) throws IOException {
         File fileJson= new File(directoryPath+fileName+endJson);
@@ -108,7 +129,12 @@ public class CreateFile implements Bufferreader {
     }
 
 
-
+    /**
+     * Metodo usado para crear un archivo de tipo txt.
+     * @param fileName Nombre que se le quiere dar al archivo
+     * @return Devuelve un archivo con extension txt
+     * @throws IOException
+     */
     public  File createTxtFile(String fileName) throws IOException {
         File fileTxt= new File(directoryPath+fileName+endTxt);
         if(!fileTxt.exists())fileTxt.createNewFile();
@@ -136,19 +162,31 @@ public class CreateFile implements Bufferreader {
         return txtFile;
     }
 
+    /**
+     * Metodo usado para crear un seguimiento los movimientos realizados en la aplicacion
+     * @param file Archivo en el que queremos que se guarde la informacion.
+     * @param mensaje Mensaje que queremos guardar en el archivo que pasamos por parametro
+     * @throws IOException
+     */
     public static void trackInfo(File file,String mensaje) throws IOException {
         FileWriter writer = new FileWriter(file, true);
-        writer.write(mensaje);
+        writer.write("------------------------------------\n"+mensaje+"\n-------------------------------------------------------------------------");
         writer.close();
 
     }
 
+    /**
+     * Metodo en el que se genera un archivo tipo Json con el nombre "ListadoDeEmpresa"
+     * @param listado Listado de las empresas que queremos almacenar en el archibdvo
+     * @throws IOException
+     * @throws FileNotFoundException
+     */
     public static void crearListadoEmpresarGson(ListadoEmpresas listado)throws IOException,FileNotFoundException{
         Gson gson = new GsonBuilder().setPrettyPrinting().excludeFieldsWithoutExposeAnnotation().create();
         try (FileWriter writer = new FileWriter(createJsontFile("ListadoDeEmpresas"))) {
             gson.toJson(listado, writer);
-            String json = gson.toJson(listado);
-            System.out.printf(json);
+           gson.toJson(listado);
+
         }catch(FileNotFoundException e){
             System.err.println(e.getMessage());
 
@@ -159,12 +197,19 @@ public class CreateFile implements Bufferreader {
 
     }
 
+    /**
+     * Metodo en el que generamos un archivo tipo Json de una empresa indica el usuario por teclado
+     * @param empresa Empresa que queremos guardar en el archibo
+     * @param nombreEmpresa Nombre de la empresa a guardar que le dara nombre al archivo.
+     * @throws IOException
+     * @throws FileNotFoundException
+     */
     public static void crearListadoEmpresarGson(Empresa empresa,String nombreEmpresa)throws IOException,FileNotFoundException{
         Gson gson = new GsonBuilder().setPrettyPrinting().excludeFieldsWithoutExposeAnnotation().create();
         try (FileWriter writer = new FileWriter(createJsontFile(nombreEmpresa))) {
             gson.toJson(empresa, writer);
-            String json = gson.toJson(empresa);
-            System.out.printf(json);
+           gson.toJson(empresa);
+
         }catch(FileNotFoundException e){
             System.err.println(e.getMessage());
 
@@ -176,7 +221,13 @@ public class CreateFile implements Bufferreader {
     }
 
 
-
+    /**
+     * Metodo para guardar en un archivo XML un listado de emoresa
+     * @param xstream Metodo para convertir archivos a XML
+     * @param Lista Listado de empresas a guardar
+     * @param archivoXML Parametro de tipo File en el que se almacenara el listado
+     * @throws FileNotFoundException
+     */
     public static void pasarAxml(XStream xstream, ListadoEmpresas Lista , File archivoXML) throws FileNotFoundException {
         xstream.alias("ListadoEmpresas", ListadoEmpresas.class);
         xstream.alias("Empresa",Empresa.class);
@@ -185,18 +236,26 @@ public class CreateFile implements Bufferreader {
         xstream.alias("Uso", Usos.class);
         xstream.toXML(Lista,new FileOutputStream(archivoXML));
 
-        String Listado = xstream.toXML(Lista);
-        System.out.printf(Listado);
-        System.out.println("\nSe ha creado xml");
+       xstream.toXML(Lista);
+
 
     }
+
+
+    /**
+     * Metodo para almacenar una empresa en un archivo XML
+     * @param xstream Metodo para pasar obejos a XML
+     * @param empresa Parametro de tipo Empresa que deseamos guarda
+     * @param archivoXML Parametro de tipo file donde queremos almacenar esa empresa
+     * @throws FileNotFoundException
+     */
     public static void pasarUnaEmpresaAxml(XStream xstream, Empresa empresa , File archivoXML) throws FileNotFoundException {
         xstream.alias("Empresa",Empresa.class);
         xstream.alias("ProductoAlquiler", ProductoAlquiler.class);
         xstream.alias("ProductoVenta", ProductoVenta.class);
         xstream.alias("Uso", Usos.class);
         xstream.toXML(empresa,new FileOutputStream(archivoXML));
-        String Listado = xstream.toXML(empresa);
+        xstream.toXML(empresa);
 
     }
 
